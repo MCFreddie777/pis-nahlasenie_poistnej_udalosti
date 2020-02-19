@@ -1,0 +1,11 @@
+{
+  "id": 123451231231,
+  "datum": "2020-02-19T14:03:16.661Z",
+  "miesto": "Ilkovičova 2, 842 16 Bratislava 4",
+  "poistna_zmluva": {
+	"poistenec": {
+	}
+  },
+  "skoda": "1500€",
+  "posledna_udalost_id": 1231414141
+}

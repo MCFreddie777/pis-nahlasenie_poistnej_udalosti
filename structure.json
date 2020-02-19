@@ -1,11 +1,49 @@
 {
   "id": 123451231231,
-  "datum": "2020-02-19T14:03:16.661Z",
-  "miesto": "Ilkovičova 2, 842 16 Bratislava 4",
+  "status": "rozpracovana",
+  "datum_nehody": "2020-02-19T14:03:16.661Z",
+  "miesto_nehody": "Ilkovičova 2, 842 16 Bratislava 4",
   "poistna_zmluva": {
-	"poistenec": {
-	}
+    "platnost_od": "2020-02-19T00:00:00.001Z",
+    "platnost_do": "2025-02-19T00:00:00.001Z",
+    "znacka_vozdila": "Honda",
+    "typ_vozdila": "Jazz",
+    "ECV": "BA055BA",
+    "palivo": "Benzin",
+    "druh_vozdila": "do 3,5 tony",
+    "ucel_pouzivania": "Bezne pouzitie",
+    "hodnota_vozidla": "5500 €",
+    "krytie": "30000€",
+    "rok_vyroby": "2005",
+    "objem_motora": "1200cm3",
+    "vykon_motora": "75kw",
+    "max_hmotnost_vozdila": "2500kg",
+    "pocet_km_rocne": "1500",
+    "poistnik": {
+      "titul": "Mgr.",
+      "meno": "Radoslav",
+      "priezvisko": "Mrkvicka",
+      "rodne_cislo": "281099/8888",
+      "tel.": "+42012345678",
+      "email": "r.mrkvickagmail.com",
+      "adresa": "573 4th St., Oakland, CA 94603"
+    }
   },
   "skoda": "1500€",
-  "posledna_udalost_id": 1231414141
+  "posledna_udalost_id": 1231414141,
+  "vodic": {
+    "titul": "Mgr.",
+    "meno": "Radoslav",
+    "priezvisko": "Mrkvicka",
+    "rodne_cislo": "281099/8888",
+    "adresa": "9709 Sunnyslope Ave. Attleboro, MA 02703",
+    "vodicky_preukaz": {
+      "cislo": 4843930,
+      "skupina": ["AM", "B1", "C", "T"],
+      "platnost_od": "2013-05-23T00:00:00.001Z",
+      "platnost_od": "2023-05-23T00:00:00.001Z",
+      "vystavene": "OR PZ Nitra"
+    }
+  },
+  "poznamka": "Vodic narazil do stlpu z dovodu pozitia neznamej omamnej latky."
 }

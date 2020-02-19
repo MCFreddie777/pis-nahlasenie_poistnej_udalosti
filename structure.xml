@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE poistna_udalost [
+		<!ELEMENT poistna_udalost (status|datum_nehody|miesto_nehody|poistna_zmluva|skoda|posledna_udalost_id|vodic|poznamka)*>
+		<!ATTLIST poistna_udalost
+				id CDATA #REQUIRED>
+		<!ELEMENT status (#PCDATA)>
+		<!ELEMENT datum_nehody (#PCDATA)>
+		<!ELEMENT miesto_nehody (#PCDATA)>
+		<!ELEMENT poistna_zmluva (platnost_od|platnost_do|znacka_vozdila|typ_vozdila|ECV|palivo|druh_vozdila|ucel_pouzivania|hodnota_vozidla|krytie|rok_vyroby|objem_motora|vykon_motora|max_hmotnost_vozdila|pocet_km_rocne|poistnik)*>
+		<!ELEMENT platnost_od (#PCDATA)>
+		<!ELEMENT platnost_do (#PCDATA)>
+		<!ELEMENT znacka_vozdila (#PCDATA)>
+		<!ELEMENT typ_vozdila (#PCDATA)>
+		<!ELEMENT ECV (#PCDATA)>
+		<!ELEMENT palivo (#PCDATA)>
+		<!ELEMENT druh_vozdila (#PCDATA)>
+		<!ELEMENT ucel_pouzivania (#PCDATA)>
+		<!ELEMENT hodnota_vozidla (#PCDATA)>
+		<!ELEMENT krytie (#PCDATA)>
+		<!ELEMENT rok_vyroby (#PCDATA)>
+		<!ELEMENT objem_motora (#PCDATA)>
+		<!ELEMENT vykon_motora (#PCDATA)>
+		<!ELEMENT max_hmotnost_vozdila (#PCDATA)>
+		<!ELEMENT pocet_km_rocne (#PCDATA)>
+		<!ELEMENT poistnik (titul|meno|priezvisko|rodne_cislo|tel.|email|adresa)*>
+		<!ELEMENT titul (#PCDATA)>
+		<!ELEMENT meno (#PCDATA)>
+		<!ELEMENT priezvisko (#PCDATA)>
+		<!ELEMENT rodne_cislo (#PCDATA)>
+		<!ELEMENT tel. (#PCDATA)>
+		<!ELEMENT email (#PCDATA)>
+		<!ELEMENT adresa (#PCDATA)>
+		<!ELEMENT skoda (#PCDATA)>
+		<!ELEMENT posledna_udalost_id (#PCDATA)>
+		<!ELEMENT vodic (titul|meno|priezvisko|rodne_cislo|adresa|vodicky_preukaz)*>
+		<!ELEMENT vodicky_preukaz (cislo|skupina|platnost_od|vystavene)*>
+		<!ELEMENT cislo (#PCDATA)>
+		<!ELEMENT skupina (#PCDATA)>
+		<!ELEMENT vystavene (#PCDATA)>
+		<!ELEMENT poznamka (#PCDATA)>
+		]>
+<poistna_udalost id="123451231231">
+	<status>rozpracovana</status>
+	<datum_nehody>2020-02-19T14:03:16.661Z</datum_nehody>
+	<miesto_nehody>Ilkovičova 2, 842 16 Bratislava 4</miesto_nehody>
+	<poistna_zmluva>
+		<platnost_od>2020-02-19T00:00:00.001Z</platnost_od>
+		<platnost_do>2025-02-19T00:00:00.001Z</platnost_do>
+		<znacka_vozdila>Honda</znacka_vozdila>
+		<typ_vozdila>Jazz</typ_vozdila>
+		<ECV>BA055BA</ECV>
+		<palivo>Benzin</palivo>
+		<druh_vozdila>do 3,5 tony</druh_vozdila>
+		<ucel_pouzivania>Bezne pouzitie</ucel_pouzivania>
+		<hodnota_vozidla>5500 €</hodnota_vozidla>
+		<krytie>30000€</krytie>
+		<rok_vyroby>2005</rok_vyroby>
+		<objem_motora>1200cm3</objem_motora>
+		<vykon_motora>75kw</vykon_motora>
+		<max_hmotnost_vozdila>2500kg</max_hmotnost_vozdila>
+		<pocet_km_rocne>1500</pocet_km_rocne>
+		<poistnik>
+			<titul>Mgr.</titul>
+			<meno>Radoslav</meno>
+			<priezvisko>Mrkvicka</priezvisko>
+			<rodne_cislo>281099/8888</rodne_cislo>
+			<tel.>+42012345678</tel.>
+			<email>r.mrkvickagmail.com</email>
+			<adresa>573 4th St., Oakland, CA 94603</adresa>
+		</poistnik>
+	</poistna_zmluva>
+	<skoda>1500€</skoda>
+	<posledna_udalost_id>1231414141</posledna_udalost_id>
+	<vodic>
+		<titul>Mgr.</titul>
+		<meno>Radoslav</meno>
+		<priezvisko>Mrkvicka</priezvisko>
+		<rodne_cislo>281099/8888</rodne_cislo>
+		<adresa>9709 Sunnyslope Ave. Attleboro, MA 02703</adresa>
+		<vodicky_preukaz>
+			<cislo>4843930</cislo>
+			<skupina>AM</skupina>
+			<skupina>B1</skupina>
+			<skupina>C</skupina>
+			<skupina>T</skupina>
+			<platnost_od>2023-05-23T00:00:00.001Z</platnost_od>
+			<vystavene>OR PZ Nitra</vystavene>
+		</vodicky_preukaz>
+	</vodic>
+	<poznamka>Vodic narazil do stlpu z dovodu pozitia neznamej omamnej latky.</poznamka>
+</poistna_udalost>

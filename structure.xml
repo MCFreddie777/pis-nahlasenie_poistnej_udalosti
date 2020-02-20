@@ -1,44 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE poistna_udalost [
-		<!ELEMENT poistna_udalost (status|datum_nehody|miesto_nehody|poistna_zmluva|skoda|posledna_udalost_id|vodic|poznamka)*>
-		<!ATTLIST poistna_udalost
-				id CDATA #REQUIRED>
-		<!ELEMENT status (#PCDATA)>
-		<!ELEMENT datum_nehody (#PCDATA)>
-		<!ELEMENT miesto_nehody (#PCDATA)>
-		<!ELEMENT poistna_zmluva (platnost_od|platnost_do|znacka_vozdila|typ_vozdila|ECV|palivo|druh_vozdila|ucel_pouzivania|hodnota_vozidla|krytie|rok_vyroby|objem_motora|vykon_motora|max_hmotnost_vozdila|pocet_km_rocne|poistnik)*>
-		<!ELEMENT platnost_od (#PCDATA)>
-		<!ELEMENT platnost_do (#PCDATA)>
-		<!ELEMENT znacka_vozdila (#PCDATA)>
-		<!ELEMENT typ_vozdila (#PCDATA)>
-		<!ELEMENT ECV (#PCDATA)>
-		<!ELEMENT palivo (#PCDATA)>
-		<!ELEMENT druh_vozdila (#PCDATA)>
-		<!ELEMENT ucel_pouzivania (#PCDATA)>
-		<!ELEMENT hodnota_vozidla (#PCDATA)>
-		<!ELEMENT krytie (#PCDATA)>
-		<!ELEMENT rok_vyroby (#PCDATA)>
-		<!ELEMENT objem_motora (#PCDATA)>
-		<!ELEMENT vykon_motora (#PCDATA)>
-		<!ELEMENT max_hmotnost_vozdila (#PCDATA)>
-		<!ELEMENT pocet_km_rocne (#PCDATA)>
-		<!ELEMENT poistnik (titul|meno|priezvisko|rodne_cislo|tel.|email|adresa)*>
-		<!ELEMENT titul (#PCDATA)>
-		<!ELEMENT meno (#PCDATA)>
-		<!ELEMENT priezvisko (#PCDATA)>
-		<!ELEMENT rodne_cislo (#PCDATA)>
-		<!ELEMENT tel. (#PCDATA)>
-		<!ELEMENT email (#PCDATA)>
-		<!ELEMENT adresa (#PCDATA)>
-		<!ELEMENT skoda (#PCDATA)>
-		<!ELEMENT posledna_udalost_id (#PCDATA)>
-		<!ELEMENT vodic (titul|meno|priezvisko|rodne_cislo|adresa|vodicky_preukaz)*>
-		<!ELEMENT vodicky_preukaz (cislo|skupina|platnost_od|vystavene)*>
-		<!ELEMENT cislo (#PCDATA)>
-		<!ELEMENT skupina (#PCDATA)>
-		<!ELEMENT vystavene (#PCDATA)>
-		<!ELEMENT poznamka (#PCDATA)>
-		]>
+<!DOCTYPE poistna_udalost SYSTEM "structure.dtd">
 <poistna_udalost id="123451231231">
 	<status>rozpracovana</status>
 	<datum_nehody>2020-02-19T14:03:16.661Z</datum_nehody>

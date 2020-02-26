@@ -50,7 +50,8 @@
 			<skupina>B1</skupina>
 			<skupina>C</skupina>
 			<skupina>T</skupina>
-			<platnost_od>2023-05-23T00:00:00.001Z</platnost_od>
+			<platnost_od>2020-05-23T00:00:00.001Z</platnost_od>
+			<platnost_do>2023-05-23T00:00:00.001Z</platnost_do>
 			<vystavene>OR PZ Nitra</vystavene>
 		</vodicky_preukaz>
 	</vodic>

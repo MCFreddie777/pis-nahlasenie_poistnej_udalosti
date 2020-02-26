@@ -36,7 +36,7 @@
 <!ELEMENT skoda (#PCDATA)>
 <!ELEMENT posledna_udalost_id (#PCDATA)>
 <!ELEMENT vodic (titul*,meno,priezvisko,rodne_cislo,adresa,vodicky_preukaz)>
-<!ELEMENT vodicky_preukaz (cislo,skupina*,platnost_od,vystavene)>
+<!ELEMENT vodicky_preukaz (cislo,skupina*,platnost_od,platnost_do,vystavene)>
 <!ELEMENT cislo (#PCDATA)>
 <!ELEMENT skupina (#PCDATA)>
 <!ELEMENT vystavene (#PCDATA)>

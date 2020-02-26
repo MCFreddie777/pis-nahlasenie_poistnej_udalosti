@@ -7,18 +7,24 @@
 	<poistna_zmluva>
 		<platnost_od>2020-02-19T00:00:00.001Z</platnost_od>
 		<platnost_do>2025-02-19T00:00:00.001Z</platnost_do>
-		<znacka_vozdila>Honda</znacka_vozdila>
-		<typ_vozdila>Jazz</typ_vozdila>
-		<ECV>BA055BA</ECV>
-		<palivo>Benzin</palivo>
-		<druh_vozdila>do 3,5 tony</druh_vozdila>
+		<vozidlo id="1">
+			<znacka>Honda</znacka>
+			<model>Jazz</model>
+			<ecv>BA055BA</ecv>
+			<farba>strieborna metaliza</farba>
+			<palivo>Benzin</palivo>
+			<typ>Osobny</typ>
+			<karoseria>hatchback</karoseria>
+			<pocet_osob>5</pocet_osob>
+			<druh_vozidla>do 3,5 tony</druh_vozidla>
+			<rok_vyroby>2005</rok_vyroby>
+			<objem_motora>1200cm3</objem_motora>
+			<vykon>75kw</vykon>
+			<nosnost>2500kg</nosnost>
+		</vozidlo>
 		<ucel_pouzivania>Bezne pouzitie</ucel_pouzivania>
 		<hodnota_vozidla>5500 €</hodnota_vozidla>
 		<krytie>30000€</krytie>
-		<rok_vyroby>2005</rok_vyroby>
-		<objem_motora>1200cm3</objem_motora>
-		<vykon_motora>75kw</vykon_motora>
-		<max_hmotnost_vozdila>2500kg</max_hmotnost_vozdila>
 		<pocet_km_rocne>1500</pocet_km_rocne>
 		<poistnik>
 			<titul>Mgr.</titul>

@@ -1,10 +1,9 @@
 # Nahlásenie poistnej udalosti
-Project at FIIT STUBA for PIS course
+*Project at FIIT STUBA for PIS course*
 
-
-**Vstup**: údaje o poistencovi, poistnej udalosti
-**Výstup**: správa pre poistenca
-**Cieľ procesu**: nahlásenie poistnej udalosti poisťovni a posunutie udalosti hodnotiteľovi
+__Vstup__: údaje o poistencovi, poistnej udalosti\
+__Výstup__: správa pre poistenca\
+__Cieľ procesu__: nahlásenie poistnej udalosti poisťovni a posunutie udalosti hodnotiteľovi
 
 Tento proces umožní poistencovi nahlásiť poistnú udalosť. Môže tak učiniť telefonicky,
 poštou, osobne na pobočke alebo online. Namodelujte poslednú možnosť.

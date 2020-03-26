@@ -9,7 +9,7 @@
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_012avf9</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_15r1g8c</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_0nqyelh</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>IntermediateThrowEvent_19hjg7j</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0tg1e6u" name="systém">
         <bpmn:flowNodeRef>ExclusiveGateway_086pncb</bpmn:flowNodeRef>
@@ -18,7 +18,6 @@
         <bpmn:flowNodeRef>ExclusiveGateway_1fd3tfc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1f2np39</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_11zzjv3</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0ce714t</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_08yk1am</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0zzw6gj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0jtf6y7</bpmn:flowNodeRef>
@@ -26,6 +25,7 @@
         <bpmn:flowNodeRef>IntermediateThrowEvent_0j1cglm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_0un8oph</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_0d71a9o</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0ce714t</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1" name="Poistník chce nahlásiť poistnú udalosť">
@@ -58,10 +58,6 @@
       <bpmn:incoming>SequenceFlow_1rs8bsy</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_10yuaob</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0ce714t" name="Uloženie poistnej udalosti do databázy">
-      <bpmn:incoming>SequenceFlow_0oognj7</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_111jddl</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_0ycicme" sourceRef="Task_012avf9" targetRef="Task_0ycqic1" />
     <bpmn:sequenceFlow id="SequenceFlow_02f4u8e" name="niektoré povinné údaje chýbajú" sourceRef="ExclusiveGateway_086pncb" targetRef="IntermediateThrowEvent_0j1cglm" />
     <bpmn:sequenceFlow id="SequenceFlow_0ep52xk" sourceRef="Task_0ycqic1" targetRef="ExclusiveGateway_086pncb" />
@@ -77,9 +73,9 @@
     <bpmn:sequenceFlow id="SequenceFlow_0c3alqh" sourceRef="EndEvent_0un8oph" targetRef="ExclusiveGateway_1f2np39" />
     <bpmn:sequenceFlow id="SequenceFlow_111jddl" sourceRef="Task_0ce714t" targetRef="ExclusiveGateway_1f2np39" />
     <bpmn:sequenceFlow id="SequenceFlow_1b982hj" sourceRef="ExclusiveGateway_1f2np39" targetRef="EndEvent_0d71a9o" />
-    <bpmn:userTask id="Task_012avf9" name="vyplnenie detailov poistnej udalosti do formulára">
+    <bpmn:userTask id="Task_012avf9" name="Vyplnenie detailov poistnej udalosti">
       <bpmn:incoming>SequenceFlow_0343h3h</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_0c2zunh</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0e2sqkg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ycicme</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:subProcess id="Task_15r1g8c" name="Prihlásenie poistníka">
@@ -88,11 +84,6 @@
     </bpmn:subProcess>
     <bpmn:sequenceFlow id="SequenceFlow_0eofurj" sourceRef="StartEvent_1" targetRef="Task_15r1g8c" />
     <bpmn:sequenceFlow id="SequenceFlow_0343h3h" sourceRef="Task_15r1g8c" targetRef="Task_012avf9" />
-    <bpmn:sequenceFlow id="SequenceFlow_0c2zunh" sourceRef="EndEvent_0nqyelh" targetRef="Task_012avf9" />
-    <bpmn:intermediateCatchEvent id="EndEvent_0nqyelh" name="Chybajúce udaje">
-      <bpmn:outgoing>SequenceFlow_0c2zunh</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0l4jc52" />
-    </bpmn:intermediateCatchEvent>
     <bpmn:exclusiveGateway id="ExclusiveGateway_08yk1am" name="Aká je výška škody ?">
       <bpmn:incoming>SequenceFlow_1mo9czs</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bnkpff</bpmn:outgoing>
@@ -109,11 +100,11 @@
       <bpmn:incoming>SequenceFlow_0fklx1v</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_02ioyhl</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:endEvent id="EndEvent_1taeyjf" name="oznámenie poistníkovi o zamietnutej žiadosti">
+    <bpmn:endEvent id="EndEvent_1taeyjf" name="oznámenie poistníkovi&#10;o zamietnutej žiadosti">
       <bpmn:incoming>SequenceFlow_02ioyhl</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_14o73oz" />
     </bpmn:endEvent>
-    <bpmn:endEvent id="IntermediateThrowEvent_0j1cglm" name="Oznámenie používatelovi&#10;o chybne vyplnenom formulári">
+    <bpmn:endEvent id="IntermediateThrowEvent_0j1cglm" name="Chýbajúce údaje">
       <bpmn:incoming>SequenceFlow_02f4u8e</bpmn:incoming>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_1dfy38r" />
     </bpmn:endEvent>
@@ -122,10 +113,19 @@
       <bpmn:outgoing>SequenceFlow_0c3alqh</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1beftts" />
     </bpmn:intermediateThrowEvent>
-    <bpmn:endEvent id="EndEvent_0d71a9o" name="Poistná udalosť je nahlásena">
+    <bpmn:endEvent id="EndEvent_0d71a9o" name="Nahlásená poistná udalosť">
       <bpmn:incoming>SequenceFlow_1b982hj</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_08fjg51" />
     </bpmn:endEvent>
+    <bpmn:boundaryEvent id="IntermediateThrowEvent_19hjg7j" attachedToRef="Task_012avf9">
+      <bpmn:outgoing>SequenceFlow_0e2sqkg</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1xlij5k" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0e2sqkg" name="Chýbajúce údaje" sourceRef="IntermediateThrowEvent_19hjg7j" targetRef="Task_012avf9" />
+    <bpmn:serviceTask id="Task_0ce714t" name="Uloženie poistnej udalosti&#10;do databázy">
+      <bpmn:incoming>SequenceFlow_0oognj7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_111jddl</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0rdjkrs">
@@ -172,7 +172,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_08yk1am_di" bpmnElement="ExclusiveGateway_08yk1am" isMarkerVisible="true">
         <dc:Bounds x="1005" y="705" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="949" y="746" width="61" height="27" />
+          <dc:Bounds x="959" y="746" width="62" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0hdy6eb_di" bpmnElement="SequenceFlow_0hdy6eb">
@@ -187,7 +187,7 @@
         <di:waypoint x="1030" y="570" />
         <di:waypoint x="1120" y="570" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="928" y="596" width="84" height="27" />
+          <dc:Bounds x="998" y="535" width="84" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0fklx1v_di" bpmnElement="SequenceFlow_0fklx1v">
@@ -210,7 +210,7 @@
         <di:waypoint x="1030" y="820" />
         <di:waypoint x="1140" y="820" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1044" y="785" width="21" height="14" />
+          <dc:Bounds x="1044" y="793" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0x9jdxg_di" bpmnElement="Task_06s96jr">
@@ -230,7 +230,7 @@
       <bpmndi:BPMNEdge id="SequenceFlow_0oognj7_di" bpmnElement="SequenceFlow_0oognj7">
         <di:waypoint x="1540" y="845" />
         <di:waypoint x="1540" y="880" />
-        <di:waypoint x="1640" y="880" />
+        <di:waypoint x="1610" y="880" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_052xx8t_di" bpmnElement="SequenceFlow_052xx8t">
         <di:waypoint x="1540" y="795" />
@@ -240,7 +240,7 @@
       <bpmndi:BPMNShape id="EndEvent_0prnfll_di" bpmnElement="EndEvent_1taeyjf">
         <dc:Bounds x="1152" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1209" y="413" width="62" height="53" />
+          <dc:Bounds x="1197" y="413" width="66" height="53" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="IntermediateThrowEvent_0h201b1_di" bpmnElement="EndEvent_0un8oph">
@@ -255,7 +255,7 @@
         <di:waypoint x="1790" y="675" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_111jddl_di" bpmnElement="SequenceFlow_111jddl">
-        <di:waypoint x="1740" y="880" />
+        <di:waypoint x="1710" y="880" />
         <di:waypoint x="1790" y="880" />
         <di:waypoint x="1790" y="725" />
       </bpmndi:BPMNEdge>
@@ -270,7 +270,7 @@
         <dc:Bounds x="1320" y="780" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_1sts3q7_di" bpmnElement="Task_0ce714t">
-        <dc:Bounds x="1640" y="840" width="100" height="80" />
+        <dc:Bounds x="1610" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SubProcess_0tmkunv_di" bpmnElement="Task_15r1g8c">
         <dc:Bounds x="310" y="200" width="100" height="80" />
@@ -283,17 +283,6 @@
         <di:waypoint x="410" y="240" />
         <di:waypoint x="440" y="240" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0c2zunh_di" bpmnElement="SequenceFlow_0c2zunh">
-        <di:waypoint x="508" y="330" />
-        <di:waypoint x="530" y="330" />
-        <di:waypoint x="530" y="280" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_06g3ixg_di" bpmnElement="EndEvent_0nqyelh">
-        <dc:Bounds x="472" y="312" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="449" y="355" width="82" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1mo9czs_di" bpmnElement="SequenceFlow_1mo9czs">
         <di:waypoint x="940" y="730" />
         <di:waypoint x="1005" y="730" />
@@ -304,15 +293,27 @@
       <bpmndi:BPMNShape id="EndEvent_1byv91b_di" bpmnElement="IntermediateThrowEvent_0j1cglm">
         <dc:Bounds x="712" y="502" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="763" y="487" width="65" height="66" />
+          <dc:Bounds x="689" y="483" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1pvp9tn_di" bpmnElement="EndEvent_0d71a9o">
         <dc:Bounds x="1902" y="682" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1881" y="725" width="78" height="27" />
+          <dc:Bounds x="1883" y="725" width="76" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_1b47tqm_di" bpmnElement="IntermediateThrowEvent_19hjg7j">
+        <dc:Bounds x="442" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0e2sqkg_di" bpmnElement="SequenceFlow_0e2sqkg">
+        <di:waypoint x="460" y="298" />
+        <di:waypoint x="460" y="318" />
+        <di:waypoint x="520" y="318" />
+        <di:waypoint x="520" y="280" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="449" y="323" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

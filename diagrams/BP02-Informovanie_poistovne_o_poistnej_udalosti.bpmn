@@ -7,13 +7,11 @@
     <bpmn:laneSet id="LaneSet_0ywpfug">
       <bpmn:lane id="Lane_1d40wm9" name="poistník">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_012avf9</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_15r1g8c</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_012avf9</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>IntermediateThrowEvent_19hjg7j</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0tg1e6u" name="systém">
-        <bpmn:flowNodeRef>ExclusiveGateway_086pncb</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0ycqic1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_06s96jr</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1fd3tfc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1f2np39</bpmn:flowNodeRef>
@@ -22,24 +20,15 @@
         <bpmn:flowNodeRef>Task_0zzw6gj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0jtf6y7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_1taeyjf</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>IntermediateThrowEvent_0j1cglm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_0un8oph</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_0d71a9o</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0ce714t</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_086pncb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>IntermediateThrowEvent_0j1cglm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0ycqic1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1ynmofq</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="StartEvent_1" name="Poistník chce nahlásiť poistnú udalosť">
-      <bpmn:outgoing>SequenceFlow_0eofurj</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_086pncb">
-      <bpmn:incoming>SequenceFlow_0ep52xk</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_02f4u8e</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_0hdy6eb</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Task_0ycqic1" name="Validácia vyplnenia povinných údajov formulára">
-      <bpmn:incoming>SequenceFlow_0ycicme</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0ep52xk</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:serviceTask id="Task_06s96jr" name="Získanie dátumu poslednej nehody poistenca&#10; z databázy">
       <bpmn:incoming>SequenceFlow_0liwufo</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1rs8bsy</bpmn:outgoing>
@@ -61,7 +50,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0ycicme" sourceRef="Task_012avf9" targetRef="Task_0ycqic1" />
     <bpmn:sequenceFlow id="SequenceFlow_02f4u8e" name="niektoré povinné údaje chýbajú" sourceRef="ExclusiveGateway_086pncb" targetRef="IntermediateThrowEvent_0j1cglm" />
     <bpmn:sequenceFlow id="SequenceFlow_0ep52xk" sourceRef="Task_0ycqic1" targetRef="ExclusiveGateway_086pncb" />
-    <bpmn:sequenceFlow id="SequenceFlow_0hdy6eb" name="všetky povinné údaje sú vyplnené" sourceRef="ExclusiveGateway_086pncb" targetRef="Task_0zzw6gj" />
+    <bpmn:sequenceFlow id="SequenceFlow_0hdy6eb" name="Áno" sourceRef="ExclusiveGateway_086pncb" targetRef="Task_0zzw6gj" />
     <bpmn:sequenceFlow id="SequenceFlow_0bnkpff" name="škoda prekračuje krytie poistky" sourceRef="ExclusiveGateway_08yk1am" targetRef="Task_0jtf6y7" />
     <bpmn:sequenceFlow id="SequenceFlow_0fklx1v" name="škoda prekračuje hodnotu vozidla" sourceRef="ExclusiveGateway_08yk1am" targetRef="Task_0jtf6y7" />
     <bpmn:sequenceFlow id="SequenceFlow_02ioyhl" sourceRef="Task_0jtf6y7" targetRef="EndEvent_1taeyjf" />
@@ -73,17 +62,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0c3alqh" sourceRef="EndEvent_0un8oph" targetRef="ExclusiveGateway_1f2np39" />
     <bpmn:sequenceFlow id="SequenceFlow_111jddl" sourceRef="Task_0ce714t" targetRef="ExclusiveGateway_1f2np39" />
     <bpmn:sequenceFlow id="SequenceFlow_1b982hj" sourceRef="ExclusiveGateway_1f2np39" targetRef="EndEvent_0d71a9o" />
-    <bpmn:userTask id="Task_012avf9" name="Vyplnenie detailov poistnej udalosti">
-      <bpmn:incoming>SequenceFlow_0343h3h</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_0e2sqkg</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0ycicme</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:subProcess id="Task_15r1g8c" name="Prihlásenie poistníka">
-      <bpmn:incoming>SequenceFlow_0eofurj</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0343h3h</bpmn:outgoing>
-    </bpmn:subProcess>
     <bpmn:sequenceFlow id="SequenceFlow_0eofurj" sourceRef="StartEvent_1" targetRef="Task_15r1g8c" />
-    <bpmn:sequenceFlow id="SequenceFlow_0343h3h" sourceRef="Task_15r1g8c" targetRef="Task_012avf9" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_08yk1am" name="Aká je výška škody ?">
       <bpmn:incoming>SequenceFlow_1mo9czs</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bnkpff</bpmn:outgoing>
@@ -104,10 +83,6 @@
       <bpmn:incoming>SequenceFlow_02ioyhl</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_14o73oz" />
     </bpmn:endEvent>
-    <bpmn:endEvent id="IntermediateThrowEvent_0j1cglm" name="Chýbajúce údaje">
-      <bpmn:incoming>SequenceFlow_02f4u8e</bpmn:incoming>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1dfy38r" />
-    </bpmn:endEvent>
     <bpmn:intermediateThrowEvent id="EndEvent_0un8oph" name="oznámenie používateľovi&#10;o prijatej žiadosti">
       <bpmn:incoming>SequenceFlow_052xx8t</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0c3alqh</bpmn:outgoing>
@@ -117,14 +92,45 @@
       <bpmn:incoming>SequenceFlow_1b982hj</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_08fjg51" />
     </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_0ce714t" name="Uloženie poistnej udalosti&#10;do databázy">
+      <bpmn:incoming>SequenceFlow_0oognj7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_111jddl</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_18ry6uq" sourceRef="Task_15r1g8c" targetRef="Task_1ynmofq" />
+    <bpmn:sequenceFlow id="SequenceFlow_1aj7rn5" sourceRef="Task_1ynmofq" targetRef="Task_012avf9" />
+    <bpmn:startEvent id="StartEvent_1" name="Poistník chce nahlásiť poistnú udalosť">
+      <bpmn:outgoing>SequenceFlow_0eofurj</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="Task_15r1g8c" name="Prihlásenie poistníka">
+      <bpmn:incoming>SequenceFlow_0eofurj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18ry6uq</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_086pncb" name="Sú vyplnené všetky údaje?">
+      <bpmn:incoming>SequenceFlow_0ep52xk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_02f4u8e</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0hdy6eb</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="IntermediateThrowEvent_0j1cglm" name="Chýbajúce údaje">
+      <bpmn:incoming>SequenceFlow_02f4u8e</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1dfy38r" />
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_0ycqic1" name="Validácia vyplnenia povinných údajov formulára">
+      <bpmn:incoming>SequenceFlow_0ycicme</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ep52xk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_012avf9" name="Vyplnenie detailov poistnej udalosti">
+      <bpmn:incoming>SequenceFlow_0e2sqkg</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1aj7rn5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ycicme</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0e2sqkg" name="Chýbajúce údaje" sourceRef="IntermediateThrowEvent_19hjg7j" targetRef="Task_012avf9" />
     <bpmn:boundaryEvent id="IntermediateThrowEvent_19hjg7j" attachedToRef="Task_012avf9">
       <bpmn:outgoing>SequenceFlow_0e2sqkg</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_1xlij5k" />
     </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0e2sqkg" name="Chýbajúce údaje" sourceRef="IntermediateThrowEvent_19hjg7j" targetRef="Task_012avf9" />
-    <bpmn:serviceTask id="Task_0ce714t" name="Uloženie poistnej udalosti&#10;do databázy">
-      <bpmn:incoming>SequenceFlow_0oognj7</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_111jddl</bpmn:outgoing>
+    <bpmn:serviceTask id="Task_1ynmofq" name="Načítanie údajov o poistníkovi&#10;z databázy">
+      <bpmn:incoming>SequenceFlow_18ry6uq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1aj7rn5</bpmn:outgoing>
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -133,9 +139,9 @@
         <dc:Bounds x="160" y="90" width="1820" height="918" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="249" y="222" width="36" height="36" />
+        <dc:Bounds x="232" y="222" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="228" y="265" width="78" height="40" />
+          <dc:Bounds x="211" y="265" width="78" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1d40wm9_di" bpmnElement="Lane_1d40wm9" isHorizontal="true">
@@ -145,28 +151,31 @@
         <dc:Bounds x="190" y="390" width="1790" height="618" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0ycicme_di" bpmnElement="SequenceFlow_0ycicme">
-        <di:waypoint x="540" y="240" />
-        <di:waypoint x="580" y="240" />
-        <di:waypoint x="580" y="690" />
+        <di:waypoint x="610" y="240" />
+        <di:waypoint x="630" y="240" />
+        <di:waypoint x="630" y="690" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_086pncb_di" bpmnElement="ExclusiveGateway_086pncb" isMarkerVisible="true">
-        <dc:Bounds x="705" y="705" width="50" height="50" />
+        <dc:Bounds x="725" y="705" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="716" y="762" width="68" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0ep52xk_di" bpmnElement="SequenceFlow_0ep52xk">
-        <di:waypoint x="630" y="730" />
-        <di:waypoint x="705" y="730" />
+        <di:waypoint x="680" y="730" />
+        <di:waypoint x="725" y="730" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0jujgdy_di" bpmnElement="Task_0ycqic1">
-        <dc:Bounds x="530" y="690" width="100" height="80" />
+        <dc:Bounds x="580" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_0uj0bf0_di" bpmnElement="Task_012avf9">
-        <dc:Bounds x="440" y="200" width="100" height="80" />
+        <dc:Bounds x="510" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_02f4u8e_di" bpmnElement="SequenceFlow_02f4u8e">
-        <di:waypoint x="730" y="705" />
-        <di:waypoint x="730" y="538" />
+        <di:waypoint x="750" y="705" />
+        <di:waypoint x="750" y="598" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="639" y="645" width="81" height="27" />
+          <dc:Bounds x="765" y="636" width="81" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_08yk1am_di" bpmnElement="ExclusiveGateway_08yk1am" isMarkerVisible="true">
@@ -176,10 +185,10 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0hdy6eb_di" bpmnElement="SequenceFlow_0hdy6eb">
-        <di:waypoint x="755" y="730" />
+        <di:waypoint x="775" y="730" />
         <di:waypoint x="840" y="730" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="751" y="676" width="89" height="27" />
+          <dc:Bounds x="796" y="736" width="20" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0bnkpff_di" bpmnElement="SequenceFlow_0bnkpff">
@@ -273,15 +282,11 @@
         <dc:Bounds x="1610" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SubProcess_0tmkunv_di" bpmnElement="Task_15r1g8c">
-        <dc:Bounds x="310" y="200" width="100" height="80" />
+        <dc:Bounds x="290" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0eofurj_di" bpmnElement="SequenceFlow_0eofurj">
-        <di:waypoint x="285" y="240" />
-        <di:waypoint x="310" y="240" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0343h3h_di" bpmnElement="SequenceFlow_0343h3h">
-        <di:waypoint x="410" y="240" />
-        <di:waypoint x="440" y="240" />
+        <di:waypoint x="268" y="240" />
+        <di:waypoint x="290" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1mo9czs_di" bpmnElement="SequenceFlow_1mo9czs">
         <di:waypoint x="940" y="730" />
@@ -291,9 +296,9 @@
         <dc:Bounds x="840" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1byv91b_di" bpmnElement="IntermediateThrowEvent_0j1cglm">
-        <dc:Bounds x="712" y="502" width="36" height="36" />
+        <dc:Bounds x="732" y="562" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="689" y="483" width="82" height="14" />
+          <dc:Bounds x="709" y="543" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1pvp9tn_di" bpmnElement="EndEvent_0d71a9o">
@@ -303,17 +308,31 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BoundaryEvent_1b47tqm_di" bpmnElement="IntermediateThrowEvent_19hjg7j">
-        <dc:Bounds x="442" y="262" width="36" height="36" />
+        <dc:Bounds x="522" y="262" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0e2sqkg_di" bpmnElement="SequenceFlow_0e2sqkg">
-        <di:waypoint x="460" y="298" />
-        <di:waypoint x="460" y="318" />
-        <di:waypoint x="520" y="318" />
-        <di:waypoint x="520" y="280" />
+        <di:waypoint x="540" y="298" />
+        <di:waypoint x="540" y="320" />
+        <di:waypoint x="590" y="320" />
+        <di:waypoint x="590" y="280" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="449" y="323" width="82" height="14" />
+          <dc:Bounds x="529" y="333" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_18ry6uq_di" bpmnElement="SequenceFlow_18ry6uq">
+        <di:waypoint x="340" y="280" />
+        <di:waypoint x="340" y="520" />
+        <di:waypoint x="360" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1aj7rn5_di" bpmnElement="SequenceFlow_1aj7rn5">
+        <di:waypoint x="460" y="520" />
+        <di:waypoint x="480" y="520" />
+        <di:waypoint x="480" y="240" />
+        <di:waypoint x="510" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0x7ma1i_di" bpmnElement="Task_1ynmofq">
+        <dc:Bounds x="360" y="480" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

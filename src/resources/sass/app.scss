@@ -1,8 +1,10 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-// Variables
-@import 'variables';
+@import 'font-awesome/fontawesome';
+@import 'font-awesome/solid';
+@import 'font-awesome/regular';
+@import 'font-awesome/brands';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import 'styles';

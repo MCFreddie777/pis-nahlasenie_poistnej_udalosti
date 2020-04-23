@@ -45,14 +45,13 @@
 
     <a href="/">
         <div
-            class="logo flex justify-center bg-red-600 h-16"
+            class="logo flex justify-center items-center bg-red-600 h-16"
         >
-            <img
-                {{--  TODO (fgic): logo--}}
-                src="{{ asset('img/logo.svg') }}"
-                alt=""
-                class="h-full w-full py-4"
+            <h1
+                class="text-2xl text-white inline-block"
             >
+                Poisťovňa s.r.o.
+            </h1>
         </div>
     </a>
 

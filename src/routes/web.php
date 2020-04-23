@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/moje-zmluvy');
+});
+
+Route::prefix('moje-zmluvy')->group(function () {
+    Route::get('/', 'ContractController@index');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{any}', function () {
+    // TODO (fgic): Make 404 Page
+    return abort(404);
+})->where('any', '.*');

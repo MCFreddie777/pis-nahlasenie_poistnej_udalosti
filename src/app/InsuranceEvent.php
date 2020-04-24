@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contract extends Model
+class InsuranceEvent extends Model
 {
+    protected $table = 'events';
     public $timestamps = false;
 }

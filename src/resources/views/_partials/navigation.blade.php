@@ -4,7 +4,7 @@
             'title' => '',
             'items' => [
                 [
-                    'path'=>'/moje-zmluvy',
+                    'path'=>'/contracts',
                     'icon'=>'fas fa-file-contract',
                     'title'=> 'Moje zmluvy',
                 ],

@@ -13,4 +13,17 @@ class ContractController extends Controller
         return view('contracts.index')
             ->with('contracts', $contracts);
     }
+
+    public function show(Request $request)
+    {
+        $contract = Contract::findOrFail($request['id']);
+
+        return view('contracts.detail')
+            ->with('contract', $contract);
+    }
+
+    public function create()
+    {
+        return view('contracts.create');
+    }
 }

@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/moje-zmluvy');
+    return redirect('/contracts');
 });
 
-Route::prefix('moje-zmluvy')->group(function () {
+Route::prefix('contracts')->group(function () {
     Route::get('/', 'ContractController@index');
+    Route::get('/new', 'ContractController@create');
+    Route::get('/{id}', 'ContractController@show');
 });
 
 Auth::routes();

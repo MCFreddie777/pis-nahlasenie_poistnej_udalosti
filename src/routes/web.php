@@ -24,6 +24,5 @@ Route::prefix('moje-zmluvy')->group(function () {
 Auth::routes();
 
 Route::get('/{any}', function () {
-    // TODO (fgic): Make 404 Page
     return abort(404);
 })->where('any', '.*');

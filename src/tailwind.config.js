@@ -14,6 +14,7 @@ module.exports = {
         padding: ['responsive', 'first', 'hover', 'focus', 'last'],
         cursor: ['hover'],
         outline: ['focus'],
+        opacity: ['hover', 'group-hover'],
         background: ['hover', 'group-hover'],
         border: ['focus', 'hover'],
         textColor: ['hover', 'focus', 'group-hover'],

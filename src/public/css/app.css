@@ -6321,23 +6321,23 @@ video {
   opacity: 1;
 }
 
-.focus\:opacity-0:focus{
+.group:hover .group-hover\:opacity-0{
   opacity: 0;
 }
 
-.focus\:opacity-25:focus{
+.group:hover .group-hover\:opacity-25{
   opacity: 0.25;
 }
 
-.focus\:opacity-50:focus{
+.group:hover .group-hover\:opacity-50{
   opacity: 0.5;
 }
 
-.focus\:opacity-75:focus{
+.group:hover .group-hover\:opacity-75{
   opacity: 0.75;
 }
 
-.focus\:opacity-100:focus{
+.group:hover .group-hover\:opacity-100{
   opacity: 1;
 }
 
@@ -29343,66 +29343,6 @@ readers do not read off random characters that represent icons */
        object-position: top;
   }
 
-  .sm\:opacity-0{
-    opacity: 0;
-  }
-
-  .sm\:opacity-25{
-    opacity: 0.25;
-  }
-
-  .sm\:opacity-50{
-    opacity: 0.5;
-  }
-
-  .sm\:opacity-75{
-    opacity: 0.75;
-  }
-
-  .sm\:opacity-100{
-    opacity: 1;
-  }
-
-  .sm\:hover\:opacity-0:hover{
-    opacity: 0;
-  }
-
-  .sm\:hover\:opacity-25:hover{
-    opacity: 0.25;
-  }
-
-  .sm\:hover\:opacity-50:hover{
-    opacity: 0.5;
-  }
-
-  .sm\:hover\:opacity-75:hover{
-    opacity: 0.75;
-  }
-
-  .sm\:hover\:opacity-100:hover{
-    opacity: 1;
-  }
-
-  .sm\:focus\:opacity-0:focus{
-    opacity: 0;
-  }
-
-  .sm\:focus\:opacity-25:focus{
-    opacity: 0.25;
-  }
-
-  .sm\:focus\:opacity-50:focus{
-    opacity: 0.5;
-  }
-
-  .sm\:focus\:opacity-75:focus{
-    opacity: 0.75;
-  }
-
-  .sm\:focus\:opacity-100:focus{
-    opacity: 1;
-  }
-
   .sm\:overflow-auto{
     overflow: auto;
   }
@@ -44818,66 +44758,6 @@ readers do not read off random characters that represent icons */
   .md\:object-top{
     -o-object-position: top;
        object-position: top;
-  }
-
-  .md\:opacity-0{
-    opacity: 0;
-  }
-
-  .md\:opacity-25{
-    opacity: 0.25;
-  }
-
-  .md\:opacity-50{
-    opacity: 0.5;
-  }
-
-  .md\:opacity-75{
-    opacity: 0.75;
-  }
-
-  .md\:opacity-100{
-    opacity: 1;
-  }
-
-  .md\:hover\:opacity-0:hover{
-    opacity: 0;
-  }
-
-  .md\:hover\:opacity-25:hover{
-    opacity: 0.25;
-  }
-
-  .md\:hover\:opacity-50:hover{
-    opacity: 0.5;
-  }
-
-  .md\:hover\:opacity-75:hover{
-    opacity: 0.75;
-  }
-
-  .md\:hover\:opacity-100:hover{
-    opacity: 1;
-  }
-
-  .md\:focus\:opacity-0:focus{
-    opacity: 0;
-  }
-
-  .md\:focus\:opacity-25:focus{
-    opacity: 0.25;
-  }
-
-  .md\:focus\:opacity-50:focus{
-    opacity: 0.5;
-  }
-
-  .md\:focus\:opacity-75:focus{
-    opacity: 0.75;
-  }
-
-  .md\:focus\:opacity-100:focus{
-    opacity: 1;
   }
 
   .md\:overflow-auto{
@@ -60297,66 +60177,6 @@ readers do not read off random characters that represent icons */
        object-position: top;
   }
 
-  .lg\:opacity-0{
-    opacity: 0;
-  }
-
-  .lg\:opacity-25{
-    opacity: 0.25;
-  }
-
-  .lg\:opacity-50{
-    opacity: 0.5;
-  }
-
-  .lg\:opacity-75{
-    opacity: 0.75;
-  }
-
-  .lg\:opacity-100{
-    opacity: 1;
-  }
-
-  .lg\:hover\:opacity-0:hover{
-    opacity: 0;
-  }
-
-  .lg\:hover\:opacity-25:hover{
-    opacity: 0.25;
-  }
-
-  .lg\:hover\:opacity-50:hover{
-    opacity: 0.5;
-  }
-
-  .lg\:hover\:opacity-75:hover{
-    opacity: 0.75;
-  }
-
-  .lg\:hover\:opacity-100:hover{
-    opacity: 1;
-  }
-
-  .lg\:focus\:opacity-0:focus{
-    opacity: 0;
-  }
-
-  .lg\:focus\:opacity-25:focus{
-    opacity: 0.25;
-  }
-
-  .lg\:focus\:opacity-50:focus{
-    opacity: 0.5;
-  }
-
-  .lg\:focus\:opacity-75:focus{
-    opacity: 0.75;
-  }
-
-  .lg\:focus\:opacity-100:focus{
-    opacity: 1;
-  }
-
   .lg\:overflow-auto{
     overflow: auto;
   }
@@ -75772,66 +75592,6 @@ readers do not read off random characters that represent icons */
   .xl\:object-top{
     -o-object-position: top;
        object-position: top;
-  }
-
-  .xl\:opacity-0{
-    opacity: 0;
-  }
-
-  .xl\:opacity-25{
-    opacity: 0.25;
-  }
-
-  .xl\:opacity-50{
-    opacity: 0.5;
-  }
-
-  .xl\:opacity-75{
-    opacity: 0.75;
-  }
-
-  .xl\:opacity-100{
-    opacity: 1;
-  }
-
-  .xl\:hover\:opacity-0:hover{
-    opacity: 0;
-  }
-
-  .xl\:hover\:opacity-25:hover{
-    opacity: 0.25;
-  }
-
-  .xl\:hover\:opacity-50:hover{
-    opacity: 0.5;
-  }
-
-  .xl\:hover\:opacity-75:hover{
-    opacity: 0.75;
-  }
-
-  .xl\:hover\:opacity-100:hover{
-    opacity: 1;
-  }
-
-  .xl\:focus\:opacity-0:focus{
-    opacity: 0;
-  }
-
-  .xl\:focus\:opacity-25:focus{
-    opacity: 0.25;
-  }
-
-  .xl\:focus\:opacity-50:focus{
-    opacity: 0.5;
-  }
-
-  .xl\:focus\:opacity-75:focus{
-    opacity: 0.75;
-  }
-
-  .xl\:focus\:opacity-100:focus{
-    opacity: 1;
   }
 
   .xl\:overflow-auto{

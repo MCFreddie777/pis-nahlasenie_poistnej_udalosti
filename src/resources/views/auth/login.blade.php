@@ -24,7 +24,7 @@
 
                 <form method="POST" action="/login" class="relative">
                     @csrf
-                    @error('login')
+                    @error('email')
                     <p
                         class="text-red-500 absolute text-sm"
                         style="top:-2rem"
@@ -85,7 +85,7 @@
                             placeholder="*********"
                             labeled
                             w-full
-                            error-key="login"
+                            error-key="email"
                         >
                         </x-ui.input>
 

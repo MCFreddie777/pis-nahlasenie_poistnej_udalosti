@@ -215,14 +215,9 @@
                             center
                             class="mt-2"
                         >
-                            <x-ui.checkbox text="A" name="group[v1][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="AM" name="group[v1][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="A1" name="group[v1][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="A2" name="group[v1][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="B" name="group[v1][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="C" name="group[v1][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="D" name="group[v1][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="T" name="group[v1][]"></x-ui.checkbox>
+                            @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
+                                <x-ui.checkbox text="{{$group}}" name="group[v1][]"></x-ui.checkbox>
+                            @endforeach
                         </x-ui.label>
                     </div>
 
@@ -347,15 +342,9 @@
                             center
                             class="mt-2"
                         >
-
-                            <x-ui.checkbox text="A" name="group[v2][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="AM" name="group[v2][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="A1" name="group[v2][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="A2" name="group[v2][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="B" name="group[v2][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="C" name="group[v2][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="D" name="group[v2][]"></x-ui.checkbox>
-                            <x-ui.checkbox text="T" name="group[v2][]"></x-ui.checkbox>
+                            @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
+                                <x-ui.checkbox text="{{$group}}" name="group[v1][]"></x-ui.checkbox>
+                            @endforeach
                         </x-ui.label>
                     </div>
                 </div>

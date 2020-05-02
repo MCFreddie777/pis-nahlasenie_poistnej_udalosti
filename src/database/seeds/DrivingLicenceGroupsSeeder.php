@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 
 class DrivingLicenceGroupsSeeder extends Seeder
 {
-    public static $groups = ['A', 'AM', 'A1', 'A2', 'B', 'BE', 'C', 'D', 'E', 'T'];
+    public static $groups = ['A', 'AM', 'A1', 'A2', 'B', 'C', 'D', 'T'];
 
     /**
      * Run the database seeds.

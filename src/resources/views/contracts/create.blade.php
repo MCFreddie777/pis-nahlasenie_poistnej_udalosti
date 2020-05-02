@@ -5,7 +5,7 @@
 @section('content')
     <div class="bg-white rounded-lg">
         <div class="p-4 pl-6">
-            <form action="/contracts" method="POST" id="sampleForm">
+            <form action="/contracts" method="POST">
                 @csrf
 
                 <input

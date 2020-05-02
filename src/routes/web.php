@@ -23,6 +23,10 @@ Route::prefix('contracts')->group(function () {
     Route::get('/{id}', 'ContractController@show');
 });
 
+Route::prefix('events')->group(function () {
+    Route::get('/{id}/new', 'InsuranceEventController@create');
+});
+
 Auth::routes();
 
 Route::get('/{any}', function () {

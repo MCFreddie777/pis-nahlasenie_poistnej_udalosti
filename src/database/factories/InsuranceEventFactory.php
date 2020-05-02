@@ -14,6 +14,7 @@ $factory->define(InsuranceEvent::class, function (Faker $faker) {
         'last_event_id' => NULL,
         'note' => $faker->text,
         'review_note' => NULL,
+        'status' => $faker->randomElement(['čakajúca', 'rozpracovaná', 'vybavená']),
         'driverA_id' => factory(Driver::class)->create(),
         'driverB_id' => factory(Driver::class)->create(),
     ];

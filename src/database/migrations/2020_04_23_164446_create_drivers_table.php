@@ -19,6 +19,7 @@ class CreateDriversTable extends Migration
             $table->string('last_name');
             $table->string("national_identity_number");
             $table->text('address');
+            $table->string('tel')->nullable();
             $table->unsignedBigInteger('licence_id');
             $table->foreign('licence_id')->references('id')->on('driving_licences')->onDelete('cascade');
         });

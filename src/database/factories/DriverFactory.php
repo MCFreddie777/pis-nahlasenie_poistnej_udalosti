@@ -13,6 +13,7 @@ $factory->define(Driver::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'national_identity_number' => $faker->unique()->regexify('[0-9]{6}/[0-9]{4}'),
         'address' => $faker->address,
+        'tel' => rand(0, 1) ? $faker->unique()->phoneNumber : NULL,
         'licence_id' => factory(DrivingLicence::class)->create(),
     ];
 });

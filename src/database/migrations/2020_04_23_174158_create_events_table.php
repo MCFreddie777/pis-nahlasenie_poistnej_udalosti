@@ -23,6 +23,7 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('last_event_id')->nullable();
             $table->text('note');
             $table->text('review_note')->nullable();
+            $table->string('status')->nullable();
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('driverA_id');

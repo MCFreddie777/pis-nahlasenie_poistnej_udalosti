@@ -13,22 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+
 Route::get('/', function () {
     return redirect('/contracts');
 });
 
-Route::prefix('contracts')->group(function () {
-    Route::get('/', 'ContractController@index');
-    Route::get('/new', 'ContractController@create');
-    Route::get('/{id}', 'ContractController@show');
+Route::middleware('auth')->group(function () {
+
+    Route::prefix('contracts')->group(function () {
+        Route::get('/', 'ContractController@index');
+        Route::get('/new', 'ContractController@create');
+        Route::get('/{id}', 'ContractController@show');
+    });
+
+    Route::prefix('events')->group(function () {
+        Route::get('/{id}/new', 'InsuranceEventController@create');
+    });
+
+    Route::prefix('change-password')->group(function () {
+        Route::get('/', 'Auth\AuthController@change')->name('pass-change');
+        Route::post('/', 'Auth\AuthController@reset');
+    });
+
+    Route::get('/logout', 'Auth\LoginController@logout');
+
+    Route::get('/{any}', function () {
+        return abort(404);
+    })->where('any', '.*');
 });
-
-Route::prefix('events')->group(function () {
-    Route::get('/{id}/new', 'InsuranceEventController@create');
-});
-
-Auth::routes();
-
-Route::get('/{any}', function () {
-    return abort(404);
-})->where('any', '.*');

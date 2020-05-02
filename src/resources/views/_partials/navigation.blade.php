@@ -2,21 +2,28 @@
     $navigation = [
         [
             'title' => '',
+            'gates' => ['user','admin'],
             'items' => [
                 [
                     'path'=>'/contracts',
                     'icon'=>'fas fa-file-contract',
                     'title'=> 'Moje zmluvy',
                 ],
+                 [
+                    'path'=>'/events',
+                    'icon'=>'fas fa-car-crash',
+                    'title'=> 'Moje poistné udalosti',
+                ],
             ]
         ],
         [
-            'title' => 'Placeholder',
+            'title' => 'Zamestnanec',
+            'gates' => ['employee','admin'],
             'items' => [
                 [
-                    'path'=> '/placeholder',
-                    'icon'=> 'fas fa-file-contract',
-                    'title'=> 'Placeholder'
+                    'path'=> '/review-events',
+                    'icon'=> 'fas fa-file-signature',
+                    'title'=> 'Poistné udalosti'
                 ],
             ]
         ],

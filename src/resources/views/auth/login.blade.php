@@ -1,73 +1,105 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+@section('title','Prihlásenie')
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+@section('master')
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    <div class="h-full flex bg-gray-200">
+        <div class="fixed flex w-full shadow-lg bg-red-600 p-4">
+            <a href="/">
+                <h1
+                    class="text-2xl text-white inline-block"
+                >
+                    Poisťovňa s.r.o.
+                </h1>
+            </a>
+        </div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+        <div class="mx-auto flex justify-center items-center ">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+            <div class="w-96 bg-white rounded-lg shadow-xl p-8">
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                <h1 class="text-gray-800 text-3xl font-bold pt-3 text-center">Vitajte</h1>
+                <p class="text-center text-gray-700">Pokračujte prosím prihlásením sa</p>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                <form method="POST" action="/login" class="relative">
+                    @csrf
+                    @error('login')
+                    <p
+                        class="text-red-500 absolute text-sm"
+                        style="top:-2rem"
+                    >
+                        @if(isset($message))
+                            <span>
+                                {{ $message }}
+                            </span>
+                        @else
+                            <span>
+                                 Niekde nastala chyba. Skúste <!--
+                            --><a
+                                    href="javascript:location.reload()"
+                                    class="text-blue-500 underline"
+                                >obnoviť stránku<!--
+                            --></a>.
+                            </span>
+                        @endif
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                    </p>
+                    @enderror
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <div
+                        class="relative mt-16 border-2 rounded border-white"
+                    >
+                        <label
+                            for="email"
+                            class="uppercase text-gray-600 text-xs font-bold absolute pl-3 pt-2"
+                        >
+                            Login
+                        </label>
+                        <x-ui.input
+                            type="email"
+                            name="email"
+                            required="true"
+                            autofocus="true"
+                            placeholder="vasa@adresa.sk"
+                            labeled
+                            w-full
+                        >
+                        </x-ui.input>
+                    </div>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                    <div
+                        class="relative mt-3 w-100 border-2 rounded border-white"
+                    >
+                        <label
+                            for="password"
+                            class="uppercase text-gray-600 text-xs font-bold absolute pl-3 pt-2"
+                        >
+                            Heslo
+                        </label>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
+                        <x-ui.input
+                            type="password"
+                            name="password"
+                            required="true"
+                            placeholder="*********"
+                            labeled
+                            w-full
+                            error-key="login"
+                        >
+                        </x-ui.input>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="pt-8 text-center">
+                        <button
+                            type="submit"
+                            class="bg-red-600 py-2 px-6 text-center rounded-full text-white mx-auto hover:bg-red-500 focus:outline-none"
+                        >
+                            Prihlásiť sa
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
 @endsection

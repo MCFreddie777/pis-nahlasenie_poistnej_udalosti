@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +52,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        // Throw 404 instead of 403 because of security reasons :)
+
+        // use Illuminate\Auth\Access\AuthorizationException;
+        if ($exception instanceof AuthorizationException) {
+            // use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+            $exception = new NotFoundHttpException;
+        }
+
+        if ($this->isHttpException($exception)) {
+            if ($exception->getStatusCode() == 404) {
+                return response()->view('errors.404');
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }

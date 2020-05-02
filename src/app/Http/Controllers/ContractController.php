@@ -11,6 +11,8 @@ class ContractController extends Controller
 {
     public function index()
     {
+        $this->checkPermissions();
+
         $contracts = Gate::allows('admin') ?
             Contract::all() :
             Contract::where('user_id', Auth::id())->get();
@@ -21,6 +23,8 @@ class ContractController extends Controller
 
     public function show(Request $request)
     {
+        $this->checkPermissions();
+
         $contract = Contract::findOrFail($request['id']);
 
         if (!Gate::allows('admin') && $contract->user->id != Auth::id())
@@ -33,5 +37,11 @@ class ContractController extends Controller
     public function create()
     {
         return view('contracts.create');
+    }
+
+    public function checkPermissions()
+    {
+        if (Gate::none(['user', 'admin']))
+            abort(404);
     }
 }

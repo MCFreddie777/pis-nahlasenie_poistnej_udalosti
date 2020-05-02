@@ -21,12 +21,15 @@ Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail
 Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
+// Redirect user to the list of contracts, employee to the events to be reviewed
 Route::get('/', function () {
-    return redirect('/contracts');
+    if (is_null(Auth::user()))
+        return redirect('/login');
+    else
+        return Auth::user()->hasRole('employee') ? redirect('/review-events') : redirect('/contracts');
 });
 
 Route::middleware('auth')->group(function () {
-
     Route::prefix('contracts')->group(function () {
         Route::get('/', 'ContractController@index');
         Route::get('/new', 'ContractController@create');
@@ -34,7 +37,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('events')->group(function () {
+        Route::get('/', 'InsuranceEventController@index');
+        Route::get('/{id}', 'InsuranceEventController@show');
         Route::get('/{id}/new', 'InsuranceEventController@create');
+    });
+
+    Route::prefix('review-events')->group(function () {
+        Route::get('/', 'EmployeeActionsController@indexEvents');
+        Route::get('/{id}', 'EmployeeActionsController@showEvents');
     });
 
     Route::prefix('change-password')->group(function () {

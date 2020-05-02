@@ -29,11 +29,6 @@
                     </svg>
                 </div>
 
-
-                <!-- <div x-text="no_of_days.length"></div>
-                <div x-text="32 - new Date(year, month, 32).getDate()"></div>
-                <div x-text="new Date(year, month).getDay()"></div> -->
-
                 <div
                     class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
                     style="width: 17rem"

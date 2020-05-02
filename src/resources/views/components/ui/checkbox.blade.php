@@ -8,6 +8,7 @@
     {{ $text }}
     <input
         type="checkbox"
+        {{ $attributes }}
         :name="$name"
     >
     <div class="checkmark flex flex-row justify-center items-center ml-1">

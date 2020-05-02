@@ -2,6 +2,22 @@
 
 @section('title','Vytvoriť novú udalosť')
 
+@section('script')
+    <script defer>
+        const prefillUserCheckbox = document.querySelector('#prefillUserCheckbox');
+        prefillUserCheckbox.addEventListener("change", () => {
+            if (!prefillUserCheckbox.checked)
+                window.location.href = "{{Request::url()}}";
+            else
+                window.location.href = "{{ Request::url() .'?'. http_build_query(array_merge(Request::query(), ['prefill' =>1]))}}"
+        });
+    </script>
+@endsection
+
+@php
+    $prefill = Request::get('prefill');
+@endphp
+
 @section('content')
     <div class="bg-white rounded-lg">
         <div class="p-4 pl-6">
@@ -74,12 +90,15 @@
                                 Vodič A
                             </h1>
 
-                            <x-ui.checkbox
-                                id="fillUserCheckBox"
-                                text="Vyplniť údaje poistníka"
-                                reversed
-                            ></x-ui.checkbox>
-
+                            <div>
+                                <x-ui.checkbox
+                                    id="prefillUserCheckbox"
+                                    text="Vyplniť údaje poistníka"
+                                    :checked="$prefill"
+                                    reversed
+                                >
+                                </x-ui.checkbox>
+                            </div>
                         </div>
 
                         <x-ui.label
@@ -92,7 +111,7 @@
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('name')"
+                                :value="$prefill ? Auth::user()->first_name : old('name')"
                             ></x-ui.input>
                         </x-ui.label>
 
@@ -106,7 +125,7 @@
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('lastname')"
+                                :value="$prefill ? Auth::user()->last_name : old('lastname')"
                             ></x-ui.input>
                         </x-ui.label>
 
@@ -121,7 +140,7 @@
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('nid')"
+                                :value="$prefill ? Auth::user()->national_identity_number : old('nid')"
                             ></x-ui.input>
                         </x-ui.label>
 
@@ -135,7 +154,7 @@
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('address')"
+                                :value="$prefill ? Auth::user()->address : old('address')"
                             ></x-ui.input>
                         </x-ui.label>
 
@@ -150,7 +169,7 @@
                                 class="text-gray-700 flex-grow"
                                 required
                                 pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                                :value="old('phone')"
+                                :value="$prefill ? Auth::user()->tel : old('phone')"
                             ></x-ui.input>
                         </x-ui.label>
 

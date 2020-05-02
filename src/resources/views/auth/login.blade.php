@@ -98,6 +98,15 @@
                             Prihlásiť sa
                         </button>
                     </div>
+
+                    <div class="flex justify-center">
+                        <a
+                            href="/password/reset"
+                            class="text-sm text-gray-500 hover:text-red-500 border-t border-gray-400 mt-5 pt-3 px-3 mx-auto"
+                        >
+                            Zabudli ste heslo?
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>

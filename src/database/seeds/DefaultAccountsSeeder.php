@@ -29,5 +29,12 @@ class DefaultAccountsSeeder extends Seeder
             $user->role_id = $role->id;
             $user->save();
         }
+
+        // Test purposes (email sending)
+        $user = new User();
+        $user->email = 'frantisek.gic@gmail.com';
+        $user->password = Hash::make('nbusr123');
+        $user->role_id = 1;
+        $user->save();
     }
 }

@@ -1,65 +1,116 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+@section('title','Prihlásenie')
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
+@section('master')
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+    <div class="h-full flex bg-gray-200">
+        <div class="fixed flex w-full shadow-lg bg-red-600 p-4">
+            <a href="/">
+                <h1
+                    class="text-2xl text-white inline-block"
+                >
+                    Poisťovňa s.r.o.
+                </h1>
+            </a>
+        </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+        <div class="mx-auto flex justify-center items-center ">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+            <div class="w-112 bg-white rounded-lg shadow-xl p-8">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                <h1 class="text-gray-800 text-3xl font-bold pt-3 text-center">Nastaviť nové heslo</h1>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                <form method="POST" action="/password/reset" class="relative mt-10">
+                    @csrf
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    @if (session('status'))
+                        <p
+                            class="text-green-500 absolute text-sm"
+                            style="top:-1.5rem"
+                        >
+                            <span>
+                            {{ session('status') }}
+                            </span>
+                        </p>
+                    @endif
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                    @if ($errors->any())
+                        <p
+                            class="text-red-500 absolute text-sm"
+                            style="top:-1.5rem"
+                        >
+                            <span>
+                                {{ $errors->all()[0] }}
+                            </span>
+                        </p>
+                    @endif
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                    <input type="hidden" name="token" value="{{ $token }}">
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
+                    <div class="flex items-center pb-3 w-full">
+                        <label
+                            class="block uppercase font-bold text-gray-500 text-sm block w-32 mr-5"
+                            for="email"
+                        >
+                            Email
+                        </label>
+                        <x-ui.input
+                            type="email"
+                            name="email"
+                            required="true"
+                            autofocus="true"
+                            class="flex-grow"
+                            placeholder="vasa@adresa.sk"
+                        >
+                        </x-ui.input>
+                    </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <div class="flex items-center pb-3 w-full">
+                        <label
+                            class="block uppercase font-bold text-gray-500 text-sm block w-32 mr-5"
+                            for="password"
+                        >
+                            Nové Heslo
+                        </label>
+                        <x-ui.input
+                            type="password"
+                            name="password"
+                            class="flex-grow"
+                            :required="true"
+                            placeholder="••••••••"
+                            autocomplete="off"
+                        ></x-ui.input>
+                    </div>
+
+                    <div class="flex items-center pb-3">
+                        <label
+                            class="uppercase font-bold text-gray-500 text-sm block w-32 mr-5"
+                            for="confirm_password"
+                        >
+                            Potvrdiť heslo
+                        </label>
+                        <x-ui.input
+                            type="password"
+                            name="password_confirmation"
+                            :required="true"
+                            class="flex-grow"
+                            placeholder="••••••••"
+                            autocomplete="off"
+                            error-key="password"
+                        ></x-ui.input>
+                    </div>
+
+                    <div class="pt-8 text-center">
+                        <button
+                            type="submit"
+                            class="bg-red-600 py-2 px-6 text-center rounded-full text-white mx-auto hover:bg-red-500 focus:outline-none"
+                        >
+                            Uložiť heslo
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
 @endsection

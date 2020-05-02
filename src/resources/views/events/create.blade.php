@@ -25,7 +25,7 @@
                 @csrf
 
                 <h1 class="text-2xl mb-10">
-                    Vytvoriť novú udalosť
+                    Vytvoriť novú udalosť k poistnej zmluve č. {{ $contract->id }}
                 </h1>
 
 

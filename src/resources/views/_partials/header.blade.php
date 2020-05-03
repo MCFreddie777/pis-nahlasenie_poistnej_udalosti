@@ -7,10 +7,10 @@
         class="flex px-5 items-center hover:cursor-pointer hover:bg-gray-100"
     >
         <x-user.circle
-            :name="Auth::user()->email"
+            :name="Auth::user()->name ?? Auth::user()->email"
         ></x-user.circle>
         <span class="pl-3 text-gray-900">
-            {{  Auth::user()->email }}
+            {{  Auth::user()->name ?? Auth::user()->email }}
         </span>
     </a>
 </div>

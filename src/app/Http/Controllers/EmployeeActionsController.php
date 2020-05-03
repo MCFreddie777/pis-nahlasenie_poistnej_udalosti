@@ -14,7 +14,16 @@ class EmployeeActionsController extends Controller
     {
         $this->checkPermissions();
 
-        $events = Event::whereNotIn('status',['vybavená'])->get();
+        if (Gate::allows('admin'))
+            $events = Event::all();
+        else
+            $events = Event::
+            where(function ($query) {
+                return $query->where('employee_id', Auth::id())
+                    ->orWhere('employee_id', null);
+            })
+                ->whereNotIn('status', ['vybavená'])
+                ->get();
 
         return view('review-events.index')
             ->with('events', $events);

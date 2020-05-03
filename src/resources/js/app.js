@@ -15,10 +15,12 @@ $(window).on('load', function () {
 });
 
 import Vue from 'vue'
-import DatePicker from "./components/DatePicker";
+import DatePicker from "./components/Ui/Datepicker";
+import Checkbox from "./components/Ui/Checkbox";
 import ReasonReview from "./components/ReasonReview"
 
-Vue.component('datepicker', DatePicker);
+Vue.component('ui-datepicker', DatePicker);
+Vue.component('ui-checkbox', Checkbox);
 Vue.component('reason-review', ReasonReview);
 
 const app = new Vue({

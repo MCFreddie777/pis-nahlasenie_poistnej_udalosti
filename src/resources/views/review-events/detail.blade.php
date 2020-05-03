@@ -32,7 +32,7 @@
                 center
                 for="date"
             >
-                <datepicker
+                <ui-datepicker
                     value="{{$event->date}}"
                     :disabled="true"
                 />
@@ -184,7 +184,7 @@
                         center
                         for="v0[valid_from]"
                     >
-                        <datepicker
+                        <ui-datepicker
                             name="v0[valid_from]"
                             value="{{$event->drivers[0]->licence->valid_from}}"
                             :disabled="true"
@@ -197,7 +197,7 @@
                         center
                         for="v0[valid_to]"
                     >
-                        <datepicker
+                        <ui-datepicker
                             name="v0[valid_to]"
                             value="{{$event->drivers[0]->licence->valid_to}}"
                             :disabled="true"
@@ -211,12 +211,12 @@
                         class="mt-2"
                     >
                         @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
-                            <x-ui.checkbox
+                            <ui-checkbox
                                 text="{{$group}}"
                                 name="v0[group][]"
-                                :checked="in_array($group,$event->drivers[0]->licence->groupNames)"
-                                disabled
-                            ></x-ui.checkbox>
+                                checked="{{in_array($group,$event->drivers[0]->licence->groupNames)}}"
+                                :disabled="true"
+                            ></ui-checkbox>
                         @endforeach
                     </x-ui.label>
                 </div>
@@ -328,7 +328,7 @@
                         center
                         for="v1[valid_from]"
                     >
-                        <datepicker
+                        <ui-datepicker
                             name="v1[valid_from]"
                             value="{{$event->drivers[1]->licence->valid_from}}"
                             :disabled="true"
@@ -341,7 +341,7 @@
                         center
                         for="v1[valid_to]"
                     >
-                        <datepicker
+                        <ui-datepicker
                             name="v1[valid_to]"
                             value="{{$event->drivers[1]->licence->valid_to}}"
                             :disabled="true"
@@ -354,12 +354,12 @@
                         class="mt-2"
                     >
                         @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
-                            <x-ui.checkbox
+                            <ui-checkbox
                                 text="{{$group}}"
                                 name="v1[group][]"
-                                :checked="in_array($group,$event->drivers[1]->licence->groupNames)"
-                                disabled
-                            ></x-ui.checkbox>
+                                checked="{{in_array($group,$event->drivers[1]->licence->groupNames)}}"
+                                :disabled="true"
+                            ></ui-checkbox>
                         @endforeach
                     </x-ui.label>
                 </div>

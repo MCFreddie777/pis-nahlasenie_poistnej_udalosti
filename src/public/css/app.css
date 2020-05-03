@@ -23742,44 +23742,6 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
-.checkbox-wrapper {
-  display: block;
-}
-
-.checkbox-wrapper input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkbox-wrapper .checkmark {
-  background-color: #fff;
-  border-radius: 0.25rem;
-  width: 1rem;
-  height: 1rem;
-  border-width: 1px;
-  border-color: #e53e3e;
-}
-
-.checkbox-wrapper input:checked ~ .checkmark {
-  background-color: #e53e3e;
-}
-
-.checkbox-wrapper input:checked ~ .checkmark > i:after {
-  display: block;
-}
-
-.checkbox-wrapper.reversed {
-  position: relative;
-}
-
-.checkbox-wrapper.reversed .checkmark {
-  position: absolute;
-  left: -2em;
-}
-
 @media (min-width: 640px){
   .sm\:space-y-0 > :not(template) ~ :not(template){
     --space-y-reverse: 0;

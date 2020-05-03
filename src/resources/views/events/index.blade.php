@@ -63,6 +63,11 @@
             <td
                 class="{{ tableRowsClassObject($options,2)}}"
             >
+                <x-ui.status-icon
+                    class="absolute"
+                    style="left:1em; top:40%;"
+                    :status="$item->status"
+                ></x-ui.status-icon>
                 {{ $item->status }}
             </td>
 

@@ -31,7 +31,7 @@
     <!-- Table rows , scoped slots -->
     @forelse($options['data']['items'] as $item)
         <tr
-            class="hover:cursor-pointer hover:bg-gray-100 table w-full group"
+            class="hover:cursor-pointer hover:bg-gray-100 table w-full group relative"
             style="table-layout: fixed;"
             @isset($options['data']['onclick'])
             onclick="window.location = '{{ url($options['data']['onclick']) }}/{{ $item->id }}'"

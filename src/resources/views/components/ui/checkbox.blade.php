@@ -1,15 +1,16 @@
-@props(['name','text','reversed'])
+@props(['name','text','reversed','value'])
 
 <label
-    :for="$name"
+    @isset($name) for="{{$name}}" @endisset
     class="uppercase font-bold text-gray-500 text-sm checkbox-wrapper flex flex-row justify-center items-center mr-3
     @isset($reversed) reversed @endisset"
 >
     {{ $text }}
     <input
         type="checkbox"
+        @isset($name) name="{{$name}}" @endisset
+        @isset($value) value="{{$value}}" @endisset
         {{ $attributes }}
-        :name="$name"
     >
     <div class="checkmark flex flex-row justify-center items-center ml-1">
         <i

@@ -32,9 +32,9 @@
                 center
                 for="date"
             >
-                <x-ui.datepicker
+                <datepicker
                     value="{{$event->date}}"
-                    disabled
+                    :disabled="true"
                 />
             </x-ui.label>
 
@@ -89,10 +89,10 @@
                     <x-ui.label
                         key="meno"
                         center
-                        for="name"
+                        for="v0[name]"
                     >
                         <x-ui.input
-                            name="name"
+                            name="v0[name]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             value="{{$event->drivers[0]->first_name}}"
@@ -103,10 +103,10 @@
                     <x-ui.label
                         key="priezvisko"
                         center
-                        for="lastname"
+                        for="v0[lastname]"
                     >
                         <x-ui.input
-                            name="lastname"
+                            name="v0[lastname]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             value="{{$event->drivers[0]->last_name}}"
@@ -118,10 +118,10 @@
                     <x-ui.label
                         key="rodné číslo"
                         center
-                        for="nid"
+                        for="v0[nid]"
                     >
                         <x-ui.input
-                            name="nid"
+                            name="v0[nid]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             value="{{$event->drivers[0]->national_identity_number}}"
@@ -132,10 +132,10 @@
                     <x-ui.label
                         key="adresa"
                         center
-                        for="address"
+                        for="v0[address]"
                     >
                         <x-ui.input
-                            name="address"
+                            name="v0[address]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             value="{{$event->drivers[0]->address}}"
@@ -146,10 +146,10 @@
                     <x-ui.label
                         key="telefónne číslo"
                         center
-                        for="phone"
+                        for="v0[phone]"
                     >
                         <x-ui.input
-                            name="phone"
+                            name="v0[phone]"
                             type="tel"
                             class="text-gray-700 flex-grow"
                             required
@@ -167,10 +167,10 @@
                     <x-ui.label
                         key="číslo"
                         center
-                        for="licensenumber"
+                        for="v0[licensenumber]"
                     >
                         <x-ui.input
-                            name="licensenumber"
+                            name="v0[licensenumber]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             value="{{$event->drivers[0]->licence->licence_id}}"
@@ -182,11 +182,12 @@
                     <x-ui.label
                         key="platnosť od"
                         center
-                        for="valid_from"
+                        for="v0[valid_from]"
                     >
-                        <x-ui.datepicker
+                        <datepicker
+                            name="v0[valid_from]"
                             value="{{$event->drivers[0]->licence->valid_from}}"
-                            disabled
+                            :disabled="true"
                         />
                     </x-ui.label>
 
@@ -194,11 +195,12 @@
                     <x-ui.label
                         key="platnosť do"
                         center
-                        for="valid_to"
+                        for="v0[valid_to]"
                     >
-                        <x-ui.datepicker
+                        <datepicker
+                            name="v0[valid_to]"
                             value="{{$event->drivers[0]->licence->valid_to}}"
-                            disabled
+                            :disabled="true"
                         />
                     </x-ui.label>
 
@@ -211,7 +213,7 @@
                         @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
                             <x-ui.checkbox
                                 text="{{$group}}"
-                                name="group[v0][]"
+                                name="v0[group][]"
                                 :checked="in_array($group,$event->drivers[0]->licence->groupNames)"
                                 disabled
                             ></x-ui.checkbox>
@@ -229,10 +231,10 @@
                     <x-ui.label
                         key="meno"
                         center
-                        for="name"
+                        for="v1[name]"
                     >
                         <x-ui.input
-                            name="name"
+                            name="v1[name]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             value="{{$event->drivers[1]->first_name}}"
@@ -243,10 +245,10 @@
                     <x-ui.label
                         key="priezvisko"
                         center
-                        for="lastname"
+                        for="v1[lastname]"
                     >
                         <x-ui.input
-                            name="lastname"
+                            name="v1[lastname]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             value="{{$event->drivers[1]->last_name}}"
@@ -258,10 +260,10 @@
                     <x-ui.label
                         key="rodné číslo"
                         center
-                        for="nid"
+                        for="v1[nid]"
                     >
                         <x-ui.input
-                            name="nid"
+                            name="v1[nid]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             value="{{$event->drivers[1]->national_identity_number}}"
@@ -272,10 +274,10 @@
                     <x-ui.label
                         key="adresa"
                         center
-                        for="address"
+                        for="v1[address]"
                     >
                         <x-ui.input
-                            name="address"
+                            name="v1[address]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             required
@@ -287,10 +289,10 @@
                     <x-ui.label
                         key="telefónne číslo"
                         center
-                        for="phone"
+                        for="v1[phone]"
                     >
                         <x-ui.input
-                            name="phone"
+                            name="v1[phone]"
                             type="tel"
                             class="text-gray-700 flex-grow"
                             required
@@ -308,10 +310,10 @@
                     <x-ui.label
                         key="číslo"
                         center
-                        for="licensenumber"
+                        for="v1[licensenumber]"
                     >
                         <x-ui.input
-                            name="licensenumber"
+                            name="v1[licensenumber]"
                             type="text"
                             class="text-gray-700 flex-grow"
                             required
@@ -324,11 +326,12 @@
                     <x-ui.label
                         key="platnosť od"
                         center
-                        for="valid_from"
+                        for="v1[valid_from]"
                     >
-                        <x-ui.datepicker
+                        <datepicker
+                            name="v1[valid_from]"
                             value="{{$event->drivers[1]->licence->valid_from}}"
-                            disabled
+                            :disabled="true"
                         />
                     </x-ui.label>
 
@@ -336,11 +339,12 @@
                     <x-ui.label
                         key="platnosť do"
                         center
-                        for="valid_to"
+                        for="v1[valid_to]"
                     >
-                        <x-ui.datepicker
+                        <datepicker
+                            name="v1[valid_to]"
                             value="{{$event->drivers[1]->licence->valid_to}}"
-                            disabled
+                            :disabled="true"
                         />
                     </x-ui.label>
 
@@ -352,7 +356,7 @@
                         @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
                             <x-ui.checkbox
                                 text="{{$group}}"
-                                name="group[v1][]"
+                                name="v1[group][]"
                                 :checked="in_array($group,$event->drivers[1]->licence->groupNames)"
                                 disabled
                             ></x-ui.checkbox>
@@ -377,54 +381,10 @@
             <form action="" method="POST">
                 @csrf
 
-                <div id="reviewReasonWrapper" class="{{ !old('review-note') ? 'hidden' : '' }}">
-                    <h1 class="text-lg mt-10 mb-4 pb-2 border-b-2 border-gray-300 w-1/4">
-                        Dôvod zamietnutia
-                    </h1>
-
-                    <textarea
-                        name="review-note"
-                        class="text-gray-700 w-full bg-gray-300 p-2 rounded focus:outline-none placeholder-gray-500"
-                        rows="4"
-                    >{{old('review-note')}}</textarea>
-                </div>
-
-                <div class="flex flex-row justify-end mt-10">
-
-                    <x-ui.button
-                        class="rounded-full"
-                        text="Zamietnuť s dôvodom"
-                        secondary
-                        type="submit"
-                        id="reviewBtn"
-                    ></x-ui.button>
-
-                    <x-ui.button
-                        class="rounded-full w-24 ml-3"
-                        text="Schváliť"
-                        primary
-                        type="submit"
-                    ></x-ui.button>
-
-                </div>
+                <reason-review
+                    note="{{ old('review-note') }}"
+                ></reason-review>
             </form>
         </div>
     </div>
 @stop
-
-@section('script')
-    <script defer>
-        let reviewOpened = {{ old('review-note') ? 'true' : 'false' }};
-        const reviewBtn = document.querySelector('#reviewBtn');
-        const reviewReasonWrapper = document.querySelector('#reviewReasonWrapper');
-        const reviewReasonTextarea = document.querySelector('#reviewReasonWrapper textarea');
-        reviewBtn.addEventListener("click", event => {
-            if (!reviewOpened) {
-                event.preventDefault();
-                reviewOpened = true;
-                reviewReasonWrapper.classList.remove('hidden');
-                reviewReasonTextarea.setAttribute('required', "true");
-            }
-        });
-    </script>
-@endsection

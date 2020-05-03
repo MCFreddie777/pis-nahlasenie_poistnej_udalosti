@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="bg-white rounded-lg">
-        <div class="p-4 pl-6">
+        <div class="p-4 pl-6 ">
 
             <div class="flex flex-row items-center mb-10 ">
 
@@ -373,6 +373,58 @@
                 disabled
             >{{$event->note}}
             </textarea>
+
+            <form action="" method="POST">
+                @csrf
+
+                <div id="reviewReasonWrapper" class="{{ !old('review-note') ? 'hidden' : '' }}">
+                    <h1 class="text-lg mt-10 mb-4 pb-2 border-b-2 border-gray-300 w-1/4">
+                        Dôvod zamietnutia
+                    </h1>
+
+                    <textarea
+                        name="review-note"
+                        class="text-gray-700 w-full bg-gray-300 p-2 rounded focus:outline-none placeholder-gray-500"
+                        rows="4"
+                    >{{old('review-note')}}</textarea>
+                </div>
+
+                <div class="flex flex-row justify-end mt-10">
+
+                    <x-ui.button
+                        class="rounded-full"
+                        text="Zamietnuť s dôvodom"
+                        secondary
+                        type="submit"
+                        id="reviewBtn"
+                    ></x-ui.button>
+
+                    <x-ui.button
+                        class="rounded-full w-24 ml-3"
+                        text="Schváliť"
+                        primary
+                        type="submit"
+                    ></x-ui.button>
+
+                </div>
+            </form>
         </div>
     </div>
 @stop
+
+@section('script')
+    <script defer>
+        let reviewOpened = {{ old('review-note') ? 'true' : 'false' }};
+        const reviewBtn = document.querySelector('#reviewBtn');
+        const reviewReasonWrapper = document.querySelector('#reviewReasonWrapper');
+        const reviewReasonTextarea = document.querySelector('#reviewReasonWrapper textarea');
+        reviewBtn.addEventListener("click", event => {
+            if (!reviewOpened) {
+                event.preventDefault();
+                reviewOpened = true;
+                reviewReasonWrapper.classList.remove('hidden');
+                reviewReasonTextarea.setAttribute('required', "true");
+            }
+        });
+    </script>
+@endsection

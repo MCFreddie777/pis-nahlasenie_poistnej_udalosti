@@ -10,7 +10,7 @@
      if (isset($primary))
          $class_object .= 'bg-red-600 text-white hover:bg-red-500 ';
      if (isset($secondary))
-         $class_object .= 'border border-gray-600 text-gray-600 bg-gray-200 ';
+         $class_object .= 'border border-gray-600 text-gray-600 bg-gray-200 hover:bg-gray-300 ';
      if (isset($danger))
          $class_object .= 'border border-red-500 text-red-500 hover:bg-red-500 hover:text-white ';
     }

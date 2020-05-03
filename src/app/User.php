@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
     /**
      * @var mixed
      */
@@ -30,6 +31,11 @@ class User extends Authenticatable
     public function contracts()
     {
         return $this->hasMany('App\Contract');
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->first_name . " " . $this->last_name;
     }
 
     /**

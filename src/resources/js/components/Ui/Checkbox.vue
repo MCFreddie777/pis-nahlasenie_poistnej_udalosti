@@ -6,17 +6,19 @@
     >
         {{ text }}
         <input
+            hidden
             type="checkbox"
             :name="name"
             :value="value"
+            :checked="inChecked"
         >
         <div
             class="flex flex-row justify-center items-center ml-1 rounded w-4 h-4 border "
-            :class="checked ? 'bg-red-600' : 'bg-white border-red-600'"
+            :class="inChecked ? 'bg-red-600' : 'bg-white border-red-600'"
             @click="toggle()"
         >
             <i
-                v-if="checked"
+                v-if="inChecked"
                 class="fas fa-check text-white text-xs"
             ></i>
         </div>
@@ -27,7 +29,13 @@
 
     export default {
 
-        props: ['name', 'checked', 'value', 'text', 'reversed', 'disabled','redirect'],
+        props: ['name', 'checked', 'value', 'text', 'reversed', 'disabled', 'redirect'],
+
+        data() {
+            return {
+                inChecked: undefined,
+            }
+        },
 
         methods: {
             toggle() {
@@ -35,22 +43,19 @@
                     window.location.href = this.redirect;
                 }
                 if (!this.disabled) {
-                    this.checked = !this.checked;
+                    this.inChecked = !this.inChecked;
                 }
             }
-        }
+        },
+
+        mounted() {
+            // mutating props in Vue is anti-pattern
+            this.inChecked = this.checked;
+        },
     }
 </script>
 
 <style lang="scss" scoped>
-    input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-    }
-
     // variants
     .reversed {
         position: relative;

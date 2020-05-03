@@ -2005,8 +2005,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['name', 'checked', 'value', 'text', 'reversed', 'disabled', 'redirect'],
+  data: function data() {
+    return {
+      inChecked: undefined
+    };
+  },
   methods: {
     toggle: function toggle() {
       if (this.redirect) {
@@ -2014,9 +2021,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (!this.disabled) {
-        this.checked = !this.checked;
+        this.inChecked = !this.inChecked;
       }
     }
+  },
+  mounted: function mounted() {
+    // mutating props in Vue is anti-pattern
+    this.inChecked = this.checked;
   }
 });
 
@@ -2241,7 +2252,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "input[data-v-112d44e3] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n  height: 0;\n  width: 0;\n}\n.reversed[data-v-112d44e3] {\n  position: relative;\n}\n.reversed div[data-v-112d44e3] {\n  position: absolute;\n  left: -2em;\n}", ""]);
+exports.push([module.i, ".reversed[data-v-112d44e3] {\n  position: relative;\n}\n.reversed div[data-v-112d44e3] {\n  position: absolute;\n  left: -2em;\n}", ""]);
 
 // exports
 
@@ -31489,8 +31500,8 @@ var render = function() {
     [
       _vm._v("\n    " + _vm._s(_vm.text) + "\n    "),
       _c("input", {
-        attrs: { type: "checkbox", name: _vm.name },
-        domProps: { value: _vm.value }
+        attrs: { hidden: "", type: "checkbox", name: _vm.name },
+        domProps: { value: _vm.value, checked: _vm.inChecked }
       }),
       _vm._v(" "),
       _c(
@@ -31498,7 +31509,7 @@ var render = function() {
         {
           staticClass:
             "flex flex-row justify-center items-center ml-1 rounded w-4 h-4 border ",
-          class: _vm.checked ? "bg-red-600" : "bg-white border-red-600",
+          class: _vm.inChecked ? "bg-red-600" : "bg-white border-red-600",
           on: {
             click: function($event) {
               return _vm.toggle()
@@ -31506,7 +31517,7 @@ var render = function() {
           }
         },
         [
-          _vm.checked
+          _vm.inChecked
             ? _c("i", { staticClass: "fas fa-check text-white text-xs" })
             : _vm._e()
         ]
@@ -31671,7 +31682,7 @@ var render = function() {
                       "button",
                       {
                         staticClass:
-                          "transiti^on ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full",
+                          "transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full",
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
@@ -44144,15 +44155,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./resources/js/components/Ui/Checkbox.vue ***!
   \*************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Checkbox_vue_vue_type_template_id_112d44e3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Checkbox.vue?vue&type=template&id=112d44e3&scoped=true& */ "./resources/js/components/Ui/Checkbox.vue?vue&type=template&id=112d44e3&scoped=true&");
 /* harmony import */ var _Checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Checkbox.vue?vue&type=script&lang=js& */ "./resources/js/components/Ui/Checkbox.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _Checkbox_vue_vue_type_style_index_0_id_112d44e3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Checkbox.vue?vue&type=style&index=0&id=112d44e3&lang=scss&scoped=true& */ "./resources/js/components/Ui/Checkbox.vue?vue&type=style&index=0&id=112d44e3&lang=scss&scoped=true&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Checkbox_vue_vue_type_style_index_0_id_112d44e3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Checkbox.vue?vue&type=style&index=0&id=112d44e3&lang=scss&scoped=true& */ "./resources/js/components/Ui/Checkbox.vue?vue&type=style&index=0&id=112d44e3&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -44184,7 +44194,7 @@ component.options.__file = "resources/js/components/Ui/Checkbox.vue"
 /*!**************************************************************************!*\
   !*** ./resources/js/components/Ui/Checkbox.vue?vue&type=script&lang=js& ***!
   \**************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

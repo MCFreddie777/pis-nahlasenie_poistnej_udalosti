@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contract;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Gate;
 
 class ContractController extends Controller
@@ -13,9 +14,15 @@ class ContractController extends Controller
     {
         $this->checkPermissions();
 
-        $contracts = Gate::allows('admin') ?
-            Contract::all() :
-            Contract::where('user_id', Auth::id())->get();
+        // REST request on api/contracts
+        $response = Http::get(env('API_URL') . "/contracts")['contracts'];
+        $contracts = Contract::hydrate($response);
+
+        // Filter only users' contracts
+        if (!Gate::allows('admin'))
+            $contracts = $contracts->filter(function ($contract) {
+                return $contract->user_id === Auth::id();
+            });
 
         return view('contracts.index')
             ->with('contracts', $contracts);
@@ -25,7 +32,9 @@ class ContractController extends Controller
     {
         $this->checkPermissions();
 
-        $contract = Contract::findOrFail($request['id']);
+        // REST request on api/contracts/{id}
+        $response = Http::get(env('API_URL') . "/contracts/" . $request->id)['contract'];
+        $contract = new Contract($response);
 
         if (!Gate::allows('admin') && $contract->user->id != Auth::id())
             abort(404);

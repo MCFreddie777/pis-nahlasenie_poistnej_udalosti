@@ -6,6 +6,4 @@ use Illuminate\Database\Eloquent\Model;
 
 class DrivingLicenceGroup extends Model
 {
-    public $timestamps = false;
-    protected $fillable = ['name'];
 }

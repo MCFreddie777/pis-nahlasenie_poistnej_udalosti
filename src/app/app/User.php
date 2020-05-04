@@ -28,11 +28,6 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
-    public function contracts()
-    {
-        return $this->hasMany('App\Contract');
-    }
-
     public function getNameAttribute()
     {
         if ($this->first_name && $this->last_name)

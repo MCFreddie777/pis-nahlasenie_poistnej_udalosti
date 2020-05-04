@@ -44,9 +44,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('review-events')->group(function () {
-        Route::get('/', 'EmployeeActionsController@indexEvents');
-        Route::get('/{id}', 'EmployeeActionsController@showEvent');
-        Route::post('/{id}', 'EmployeeActionsController@handleReview');
+        Route::get('/', 'ReviewEventsController@index');
+        Route::get('/{id}', 'ReviewEventsController@show');
+        Route::post('/{id}', 'ReviewEventsController@store');
     });
 
     Route::prefix('change-password')->group(function () {

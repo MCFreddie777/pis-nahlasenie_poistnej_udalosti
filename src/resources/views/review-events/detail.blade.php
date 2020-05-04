@@ -228,7 +228,7 @@
                             <ui-checkbox
                                 text="{{$group}}"
                                 name="v0[group][]"
-                                checked="{{in_array($group,$event->drivers[0]->licence->groupNames)}}"
+                                @if(in_array($group,$event->drivers[0]->licence->group_names)) checked @endif
                                 disabled
                             ></ui-checkbox>
                         @endforeach
@@ -386,7 +386,7 @@
                             <ui-checkbox
                                 text="{{$group}}"
                                 name="v1[group][]"
-                                checked="{{in_array($group,$event->drivers[1]->licence->groupNames)}}"
+                                @if(in_array($group,$event->drivers[1]->licence->group_names)) checked @endif
                                 disabled
                             ></ui-checkbox>
                         @endforeach

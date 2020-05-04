@@ -14,7 +14,7 @@ class ContractController extends Controller
     {
         $this->checkPermissions();
 
-        // REST request on api/contracts
+        // GET request to REST api/contracts
         $response = Http::get(env('API_URL') . "/contracts")['contracts'];
         $contracts = Contract::hydrate($response);
 
@@ -32,7 +32,7 @@ class ContractController extends Controller
     {
         $this->checkPermissions();
 
-        // REST request on api/contracts/{id}
+        // GET request to REST api/contracts/{id}
         $response = Http::get(env('API_URL') . "/contracts/" . $request->id)['contract'];
         $contract = new Contract($response);
 

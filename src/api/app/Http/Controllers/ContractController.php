@@ -14,7 +14,7 @@ class ContractController extends Controller
         return response()->json(['contracts' => $contracts]);
     }
 
-    public function get(Request $request)
+    public function show(Request $request)
     {
         $contract = Contract::findOrFail($request['id']);
         return response()->json(['contract' => $contract]);

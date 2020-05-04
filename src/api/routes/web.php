@@ -15,13 +15,14 @@
 
 $router->group(['prefix' => 'contracts'], function () use ($router) {
     $router->get('/', 'ContractController@index');
-    $router->get('/{id}', 'ContractController@get');
+    $router->get('/{id}', 'ContractController@show');
 });
 
 $router->group(['prefix' => 'events'], function () use ($router) {
     $router->get('/', 'InsuranceEventController@index');
     $router->post('/', 'InsuranceEventController@store');
-    $router->get('/{id}', 'InsuranceEventController@get');
+    $router->get('/{id}', 'InsuranceEventController@show');
+    $router->post('/{id}', 'InsuranceEventController@update');
 });
 
 $router->get('/{any:.*}', function () {

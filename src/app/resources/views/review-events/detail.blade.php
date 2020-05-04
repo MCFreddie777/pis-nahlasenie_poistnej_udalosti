@@ -409,7 +409,6 @@
 
             <form action="" method="POST">
                 @csrf
-
                 <reason-review
                     note="{{ old('review-note') }}"
                 ></reason-review>

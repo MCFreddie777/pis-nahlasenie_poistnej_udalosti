@@ -16,7 +16,7 @@ class InsuranceEventController extends Controller
 {
     public function index()
     {
-        // REST request on api/events
+        // GET request to REST api/events
         $response = Http::get(env('API_URL') . "/events")['events'];
         $events = Event::hydrate($response);
 
@@ -37,7 +37,7 @@ class InsuranceEventController extends Controller
 
     public function show(Request $request)
     {
-        // REST request on api/events/{id}
+        // GET request to REST api/events/{id}
         $response = Http::get(env('API_URL') . "/events/" . $request->id)['event'];
         $event = $this->mapDependencies(new Event($response));
 
@@ -49,7 +49,7 @@ class InsuranceEventController extends Controller
 
     public function create(Request $request)
     {
-        // REST request on api/contracts/{id}
+        // GET request to REST api/contracts/{id}
         $response = Http::get(env('API_URL') . "/contracts/" . $request->id)['contract'];
         $contract = new Contract($response);
 

@@ -17,7 +17,7 @@ class ReviewEventsController extends Controller
     {
         $this->checkPermissions();
 
-        // REST request on api/events
+        // GET request to REST api/events
         $response = Http::get(env('API_URL') . "/events")['events'];
         $events = Event::hydrate($response);
 
@@ -41,7 +41,7 @@ class ReviewEventsController extends Controller
 
     public function show(Request $request)
     {
-        // REST request on api/events/{id}
+        // GET request to REST api/events/{id}
         $response = Http::get(env('API_URL') . "/events/" . $request->id)['event'];
         $event = $this->mapDependencies(new Event($response));
 
@@ -51,9 +51,21 @@ class ReviewEventsController extends Controller
             ->with('event', $event);
     }
 
-    public function handle(Request $request)
+    public function store(Request $request)
     {
-        // TODO
+        $response = Http::asForm()->post(
+            env('API_URL') . "/events/" . $request->id,
+            array_merge($request->all(), ['user_id' => Auth::id()])
+        )->json();
+
+        if (isset($response['success']) && !!$response['success']) {
+            session()->put(['success' => ['Poistná udalosť bola úspešne spracovaná.']]);
+            return redirect('/');
+        }
+
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['Nepodarilo sa spracovať poistnú udalosť']);
     }
 
     public function checkPermissions($event = null)
@@ -77,7 +89,7 @@ class ReviewEventsController extends Controller
 
         $model->drivers = array_map(function ($driver) {
             $driverObj = new Driver($driver);
-            $driverObj->licence = new DrivingLicence((array) $driverObj->licence);
+            $driverObj->licence = new DrivingLicence((array)$driverObj->licence);
             return $driverObj;
         }, $model->drivers);
 

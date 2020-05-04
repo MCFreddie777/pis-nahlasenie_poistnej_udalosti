@@ -7,6 +7,7 @@ use App\Driver;
 use App\DrivingLicence;
 use App\DrivingLicenceGroup;
 use App\InsuranceEvent as Event;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Gate;
@@ -20,10 +21,10 @@ class InsuranceEventController extends Controller
         return response()->json(['events' => $events]);
     }
 
-    public function get(Request $request)
+    public function show(Request $request)
     {
         $event = Event::with(['contract'])->findOrFail($request['id']);
-        return response()->json(['event' =>  $event]);
+        return response()->json(['event' => $event]);
     }
 
     public function store(Request $request)
@@ -98,6 +99,31 @@ class InsuranceEventController extends Controller
         return redirect()->back()
             ->withInput()
             ->withErrors(['Nepodarilo sa vytvoriť poistnú udalosť']);
+    }
+
+    public function update(Request $request)
+    {
+        // Find the id
+        $event = Event::findOrFail($request['id']);
+
+        // Validate request
+        $this->validate($request, [
+            'user_id' => 'required|numeric',
+            'review-note' => 'nullable|string',
+        ]);
+
+        // Set details
+        $event->employee_id = $request->get('user_id');
+        if ($request->get('review-note')) {
+            $event->review_note = $request->get('review-note');
+            $event->status = 'zamietnutá';
+        } else {
+            $event->status = 'vybavená';
+        }
+
+        // Save and handle
+        $res = $event->save();
+        return response()->json(['success' => !!$res]);
     }
 
     /*
@@ -179,5 +205,10 @@ class InsuranceEventController extends Controller
             '*.group.*.alpha_num' => 'Skupina vodičského preukazu niektorého z vodičov je v zlom formáte',
             '*.group.*.max' => 'Skupina vodičského preukazu niektorého z vodičov je v zlom formáte',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(['success' => 'false'], 422));
     }
 }

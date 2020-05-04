@@ -92,7 +92,7 @@
                     class="text-gray-400 hover:text-gray-600 mx-auto opacity-0 group-hover:opacity-100"
                     text="Vytvoriť udalosť"
                     type="link"
-                    :href="'/events/'. $item->id .'/new'"
+                    href="/events/new?id={{$item->id}}"
                 >
                 </x-ui.button>
             </td>

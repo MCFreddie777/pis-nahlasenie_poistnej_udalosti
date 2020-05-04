@@ -8,7 +8,6 @@
     <div class="antialiased sans-serif">
         <div v-cloak>
             <div class="w-64">
-
                 <div class="relative">
                     <input
                         :name="name"
@@ -21,15 +20,20 @@
                         type="text"
                         readonly
                         v-model="datepickerValue"
-                        @click="showDatepicker = !showDatepicker"
+                        @click="open()"
                         @keydown.escape="showDatepicker = false"
-                        class="w-full pl-4 pr-10 py-3 leading-none rounded  focus:outline-none text-gray-700 font-medium bg-gray-300"
+                        class="w-full pl-4 pr-10 py-3 leading-none rounded focus:outline-none text-gray-700 font-medium bg-gray-300"
+                        :class="{'border-2 border-red-600':error}"
                         placeholder="Select date"
                         :required="required"
                         :disabled="disabled"
                     >
 
-                    <div class="absolute top-0 right-0 px-3 py-2" v-if="!disabled">
+                    <div
+                        class="absolute top-0 right-0 px-3"
+                        :class="error ? 'py-3' : 'py-2'"
+                        v-if="!disabled"
+                    >
                         <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -116,13 +120,19 @@
                 default: 'date'
             },
             disabled: {
+                type: Boolean,
                 default: false
             },
             required: {
+                type: Boolean,
                 default: false
             },
             value: {
                 default: undefined
+            },
+            error: {
+                type: Boolean,
+                default: false
             }
         },
 
@@ -148,6 +158,12 @@
         },
 
         methods: {
+
+            open() {
+                this.showDatepicker = !this.showDatepicker;
+                this.error = false;
+            },
+
             initDate() {
                 const today = this.value ? new Date(this.value) : new Date();
                 this.month = today.getMonth();

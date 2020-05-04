@@ -2,18 +2,6 @@
 
 @section('title','Vytvoriť novú udalosť')
 
-@section('script')
-    <script defer>
-        const prefillUserCheckbox = document.querySelector('#prefillUserCheckbox');
-        prefillUserCheckbox.addEventListener("change", () => {
-            if (!prefillUserCheckbox.checked)
-                window.location.href = "{{Request::url()}}";
-            else
-                window.location.href = "{{ Request::url() .'?'. http_build_query(array_merge(Request::query(), ['prefill' =>1]))}}"
-        });
-    </script>
-@endsection
-
 @php
     $prefill = Request::get('prefill');
 @endphp
@@ -21,8 +9,10 @@
 @section('content')
     <div class="bg-white rounded-lg">
         <div class="p-4 pl-6">
-            <form action="/contracts" method="POST">
+            <form action="/events" method="POST">
                 @csrf
+
+                <input type="hidden" name="contract_id" value="{{Request::get('id')}}">
 
                 <h1 class="text-2xl mb-10">
                     Vytvoriť novú udalosť k poistnej zmluve č. {{ $contract->id }}
@@ -33,14 +23,18 @@
                     Údaje o dopravnej nehode
                 </h1>
 
-
                 {{-- datum --}}
                 <x-ui.label
                     key="dátum"
                     center
                     for="date"
                 >
-                    <x-ui.datepicker/>
+                    <ui-datepicker
+                        name="date"
+                        value="{{old('date')}}"
+                        required
+                        @if($errors->has('date')) error @endif
+                    />
                 </x-ui.label>
 
                 {{-- miesto --}}
@@ -91,85 +85,86 @@
                             </h1>
 
                             <div>
-                                <x-ui.checkbox
-                                    id="prefillUserCheckbox"
+                                <ui-checkbox
                                     text="Vyplniť údaje poistníka"
-                                    :checked="$prefill"
                                     reversed
+                                    @if(!!$prefill) checked @endif
+                                    redirect="{{ Request::url() .'?'. http_build_query(array_merge(Request::query(), ['prefill' =>(int)!$prefill ]))}}"
                                 >
-                                </x-ui.checkbox>
+                                </ui-checkbox>
                             </div>
                         </div>
 
                         <x-ui.label
                             key="meno"
                             center
-                            for="name"
+                            for="v0[first_name]"
                         >
                             <x-ui.input
-                                name="name"
+                                name="v0[first_name]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="$prefill ? Auth::user()->first_name : old('name')"
+                                :value="$prefill ? Auth::user()->first_name : old('v0.first_name')"
+                                error-key="v0.first_name"
                             ></x-ui.input>
                         </x-ui.label>
 
                         <x-ui.label
                             key="priezvisko"
                             center
-                            for="lastname"
+                            for="v0[last_name]"
                         >
                             <x-ui.input
-                                name="lastname"
+                                name="v0[last_name]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="$prefill ? Auth::user()->last_name : old('lastname')"
+                                :value="$prefill ? Auth::user()->last_name : old('v0.last_name')"
+                                error-key="v0.last_name"
                             ></x-ui.input>
                         </x-ui.label>
 
-                        {{-- nid - national identification number --}}
                         <x-ui.label
                             key="rodné číslo"
                             center
-                            for="nid"
+                            for="v0[national_identity_number]"
                         >
                             <x-ui.input
-                                name="nid"
+                                name="v0[national_identity_number]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="$prefill ? Auth::user()->national_identity_number : old('nid')"
+                                :value="$prefill ? Auth::user()->national_identity_number : old('v0.national_identity_number')"
+                                error-key="v0.national_identity_number"
                             ></x-ui.input>
                         </x-ui.label>
 
                         <x-ui.label
                             key="adresa"
                             center
-                            for="address"
+                            for="v0[address]"
                         >
                             <x-ui.input
-                                name="address"
+                                name="v0[address]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="$prefill ? Auth::user()->address : old('address')"
+                                :value="$prefill ? Auth::user()->address : old('v0.address')"
+                                error-key="v0.address"
                             ></x-ui.input>
                         </x-ui.label>
-
                         <x-ui.label
                             key="telefónne číslo"
                             center
-                            for="phone"
+                            for="v0[phone]"
                         >
                             <x-ui.input
-                                name="phone"
+                                name="v0[phone]"
                                 type="tel"
                                 class="text-gray-700 flex-grow"
-                                required
-                                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                                :value="$prefill ? Auth::user()->tel : old('phone')"
+                                :value="$prefill ? Auth::user()->tel : old('v0.phone')"
+                                error-key="v0.phone"
                             ></x-ui.input>
                         </x-ui.label>
 
@@ -181,14 +176,15 @@
                         <x-ui.label
                             key="číslo"
                             center
-                            for="licensenumber"
+                            for="v0[licence_id]"
                         >
                             <x-ui.input
-                                name="licensenumber"
+                                name="v0[licence_id]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('licensenumber')"
+                                :value="old('v0.licence_id')"
+                                error-key="v0.licence_id"
                             ></x-ui.input>
                         </x-ui.label>
 
@@ -196,9 +192,14 @@
                         <x-ui.label
                             key="platnosť od"
                             center
-                            for="valid_from"
+                            for="v0[valid_from]"
                         >
-                            <x-ui.datepicker/>
+                            <ui-datepicker
+                                name="v0[valid_from]"
+                                value="{{old('v0.valid_from')}}"
+                                required
+                                @if($errors->has('v0.valid_from')) error @endif
+                            />
                         </x-ui.label>
 
                         {{-- platnost do --}}
@@ -207,7 +208,28 @@
                             center
                             for="valid_to"
                         >
-                            <x-ui.datepicker/>
+                            <ui-datepicker
+                                name="v0[valid_to]"
+                                value="{{old('v0.valid_to')}}"
+                                required
+                                @if($errors->has('v0.valid_to')) error @endif
+                            />
+                        </x-ui.label>
+
+                        {{-- vystavil --}}
+                        <x-ui.label
+                            key="vystavil"
+                            center
+                            for="issued_by"
+                        >
+                            <x-ui.input
+                                name="v0[issued_by]"
+                                type="text"
+                                class="text-gray-700 flex-grow"
+                                required
+                                :value="old('v0.issued_by')"
+                                error-key="v0.issued_by"
+                            ></x-ui.input>
                         </x-ui.label>
 
                         <x-ui.label
@@ -216,7 +238,13 @@
                             class="mt-2"
                         >
                             @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
-                                <x-ui.checkbox text="{{$group}}" name="group[v1][]"></x-ui.checkbox>
+                                <ui-checkbox
+                                    text="{{$group}}"
+                                    name="v0[group][]"
+                                    value="{{$group}}"
+                                    @if(in_array($group,old('v0.group')??[])) checked @endif
+                                    required
+                                ></ui-checkbox>
                             @endforeach
                         </x-ui.label>
                     </div>
@@ -231,72 +259,74 @@
                         <x-ui.label
                             key="meno"
                             center
-                            for="name"
+                            for="v1[first_name]"
                         >
                             <x-ui.input
-                                name="name"
+                                name="v1[first_name]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('name')"
+                                :value="old('v1.first_name')"
+                                error-key="v1.first_name"
                             ></x-ui.input>
                         </x-ui.label>
 
                         <x-ui.label
                             key="priezvisko"
                             center
-                            for="lastname"
+                            for="v1[last_name]"
                         >
                             <x-ui.input
-                                name="lastname"
+                                name="v1[last_name]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('lastname')"
+                                :value="old('v1.last_name')"
+                                error-key="v1.last_name"
                             ></x-ui.input>
                         </x-ui.label>
 
-                        {{-- nid - national identification number --}}
                         <x-ui.label
                             key="rodné číslo"
                             center
-                            for="nid"
+                            for="v1[national_identity_number]"
                         >
                             <x-ui.input
-                                name="nid"
+                                name="v1[national_identity_number]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('nid')"
+                                :value="old('v1.national_identity_number')"
+                                error-key="v1.national_identity_number"
                             ></x-ui.input>
                         </x-ui.label>
 
                         <x-ui.label
                             key="adresa"
                             center
-                            for="address"
+                            for="v1[address]"
                         >
                             <x-ui.input
-                                name="address"
+                                name="v1[address]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('address')"
+                                :value="old('v1.address')"
+                                error-key="v1.address"
                             ></x-ui.input>
                         </x-ui.label>
 
                         <x-ui.label
                             key="telefónne číslo"
                             center
-                            for="phone"
+                            for="v1[phone]"
                         >
                             <x-ui.input
-                                name="phone"
+                                name="v1[phone]"
                                 type="tel"
                                 class="text-gray-700 flex-grow"
-                                required
-                                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                                :value="old('phone')"
+                                :value="old('v1.phone')"
+                                error-key="v1.phone"
                             ></x-ui.input>
                         </x-ui.label>
 
@@ -308,14 +338,15 @@
                         <x-ui.label
                             key="číslo"
                             center
-                            for="licensenumber"
+                            for="v1[licence_id]"
                         >
                             <x-ui.input
-                                name="licensenumber"
+                                name="v1[licence_id]"
                                 type="text"
                                 class="text-gray-700 flex-grow"
                                 required
-                                :value="old('licensenumber')"
+                                :value="old('v1.licence_id')"
+                                error-key="v1.licence_id"
                             ></x-ui.input>
                         </x-ui.label>
 
@@ -323,18 +354,44 @@
                         <x-ui.label
                             key="platnosť od"
                             center
-                            for="valid_from"
+                            for="v1[valid_from]"
                         >
-                            <x-ui.datepicker/>
+                            <ui-datepicker
+                                name="v1[valid_from]"
+                                value="{{old('v1.valid_from')}}"
+                                required
+                                @if($errors->has('v1.valid_from')) error @endif
+                            />
                         </x-ui.label>
 
                         {{-- platnost do --}}
                         <x-ui.label
                             key="platnosť do"
                             center
-                            for="valid_to"
+                            for="v1[valid_to]"
                         >
-                            <x-ui.datepicker/>
+                            <ui-datepicker
+                                name="v1[valid_to]"
+                                value="{{old('v1.valid_to')}}"
+                                required
+                                @if($errors->has('v1.valid_to')) error @endif
+                            />
+                        </x-ui.label>
+
+                        {{-- vystavil --}}
+                        <x-ui.label
+                            key="vystavil"
+                            center
+                            for="issued_by"
+                        >
+                            <x-ui.input
+                                name="v1[issued_by]"
+                                type="text"
+                                class="text-gray-700 flex-grow"
+                                required
+                                :value="old('v1.issued_by')"
+                                error-key="v1.issued_by"
+                            ></x-ui.input>
                         </x-ui.label>
 
                         <x-ui.label
@@ -343,7 +400,13 @@
                             class="mt-2"
                         >
                             @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
-                                <x-ui.checkbox text="{{$group}}" name="group[v1][]"></x-ui.checkbox>
+                                <ui-checkbox
+                                    text="{{$group}}"
+                                    name="v1[group][]"
+                                    value="{{$group}}"
+                                    @if(in_array($group,old('v1.group')??[])) checked @endif
+                                    required
+                                ></ui-checkbox>
                             @endforeach
                         </x-ui.label>
                     </div>
@@ -356,8 +419,10 @@
 
                 <textarea
                     name="description"
-                    class="text-gray-700 w-full bg-gray-300 p-2 rounded focus:outline-none placeholder-gray-500"
+                    class="text-gray-700 w-full bg-gray-300 p-2 rounded focus:outline-none placeholder-gray-500
+                    @if($errors->has('v1.description')) border-2 border-red-500 @endif"
                     rows="4"
+                    required
                 >{{ old('description') }}</textarea>
 
                 <x-ui.button

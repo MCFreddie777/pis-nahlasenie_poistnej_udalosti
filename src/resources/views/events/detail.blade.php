@@ -34,7 +34,7 @@
             >
                 <ui-datepicker
                     value="{{$event->date}}"
-                    :disabled="true"
+                    disabled
                 />
             </x-ui.label>
 
@@ -82,7 +82,7 @@
                 <div class="w-1/2 border border-gray-300 rounded p-5 mr-10">
 
 
-                    <h1 class="text-lg">
+                    <h1 class="text-lg mb-5">
                         Vodič A
                     </h1>
 
@@ -101,7 +101,7 @@
                     </x-ui.label>
 
                     <x-ui.label
-                        key="v0[priezvisko]"
+                        key="priezvisko"
                         center
                         for="lastname"
                     >
@@ -144,7 +144,7 @@
                     </x-ui.label>
 
                     <x-ui.label
-                        key="v0[telefónne číslo]"
+                        key="telefónne číslo"
                         center
                         for="phone"
                     >
@@ -154,7 +154,7 @@
                             class="text-gray-700 flex-grow"
                             required
                             pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                            value="{{$event->drivers[0]->tel}}"
+                            value="{{$event->drivers[0]->phone}}"
                             disabled
                         ></x-ui.input>
                     </x-ui.label>
@@ -187,7 +187,7 @@
                         <ui-datepicker
                             value="{{$event->drivers[0]->licence->valid_from}}"
                             name="v0[valid_from]"
-                            :disabled="true"
+                            disabled
                         />
                     </x-ui.label>
 
@@ -200,10 +200,24 @@
                         <ui-datepicker
                             name="v0[valid_to]"
                             value="{{$event->drivers[0]->licence->valid_to}}"
-                            :disabled="true"
+                            disabled
                         />
                     </x-ui.label>
 
+                    {{-- vystavil --}}
+                    <x-ui.label
+                        key="vystavil"
+                        center
+                        for="issued_by"
+                    >
+                        <x-ui.input
+                            name="v0[issued_by]"
+                            type="text"
+                            class="text-gray-700 flex-grow"
+                            value="{{$event->drivers[0]->licence->issued_by}}"
+                            error-key="v0.issued_by"
+                        ></x-ui.input>
+                    </x-ui.label>
 
                     <x-ui.label
                         key="skupina"
@@ -215,7 +229,7 @@
                                 text="{{$group}}"
                                 name="v0[group][]"
                                 checked="{{in_array($group,$event->drivers[0]->licence->groupNames)}}"
-                                :disabled="true"
+                                disabled
                             ></ui-checkbox>
                         @endforeach
                     </x-ui.label>
@@ -331,7 +345,7 @@
                         <ui-datepicker
                             name="v1[valid_from]"
                             value="{{$event->drivers[1]->licence->valid_from}}"
-                            :disabled="true"
+                            disabled
                         />
                     </x-ui.label>
 
@@ -344,8 +358,24 @@
                         <ui-datepicker
                             name="v1[valid_to]"
                             value="{{$event->drivers[1]->licence->valid_to}}"
-                            :disabled="true"
+                            disabled
                         />
+                    </x-ui.label>
+
+
+                    {{-- vystavil --}}
+                    <x-ui.label
+                        key="vystavil"
+                        center
+                        for="issued_by"
+                    >
+                        <x-ui.input
+                            name="v1[issued_by]"
+                            type="text"
+                            class="text-gray-700 flex-grow"
+                            value="{{$event->drivers[1]->licence->issued_by}}"
+                            error-key="v1.issued_by"
+                        ></x-ui.input>
                     </x-ui.label>
 
                     <x-ui.label
@@ -358,7 +388,7 @@
                                 text="{{$group}}"
                                 name="v1[group][]"
                                 checked="{{in_array($group,$event->drivers[1]->licence->groupNames)}}"
-                                :disabled="true"
+                                disabled
                             ></ui-checkbox>
                         @endforeach
                     </x-ui.label>

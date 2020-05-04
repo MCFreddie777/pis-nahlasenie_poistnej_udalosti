@@ -9,6 +9,7 @@ class InsuranceEvent extends Model
     protected $table = 'events';
 
     public $timestamps = false;
+    protected $guarded = [];
 
     public function contract()
     {
@@ -25,5 +26,10 @@ class InsuranceEvent extends Model
     public function getEmployeeAttribute()
     {
         return User::where('id',$this->employee_id)->first();
+    }
+
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['note'] = $value;
     }
 }

@@ -29,7 +29,28 @@
 
     export default {
 
-        props: ['name', 'checked', 'value', 'text', 'reversed', 'disabled', 'redirect'],
+        props: {
+            name,
+            checked: {
+                type: Boolean,
+                default: false,
+            },
+            disabled: {
+                type: Boolean,
+                default: false
+            },
+            value: {
+                default: '',
+            },
+            text: {
+                default: '',
+            },
+            reversed: {
+                type: Boolean,
+                default: false
+            },
+            redirect: {},
+        },
 
         data() {
             return {

@@ -19,6 +19,7 @@ class CreateGroupLicenceTable extends Migration
             $table->unsignedBigInteger('licence_id');
             $table->foreign('group_id')->references('id')->on('driving_licence_groups');
             $table->foreign('licence_id')->references('id')->on('driving_licences');
+            $table->unique(['group_id', 'licence_id']);
         });
     }
 

@@ -38,8 +38,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('events')->group(function () {
         Route::get('/', 'InsuranceEventController@index');
+        Route::get('/new', 'InsuranceEventController@create');
+        Route::post('/', 'InsuranceEventController@store');
         Route::get('/{id}', 'InsuranceEventController@show');
-        Route::get('/{id}/new', 'InsuranceEventController@create');
     });
 
     Route::prefix('review-events')->group(function () {

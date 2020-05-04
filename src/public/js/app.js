@@ -2008,7 +2008,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'checked', 'value', 'text', 'reversed', 'disabled', 'redirect'],
+  props: {
+    name: name,
+    checked: {
+      type: Boolean,
+      "default": false
+    },
+    disabled: {
+      type: Boolean,
+      "default": false
+    },
+    value: {
+      "default": ''
+    },
+    text: {
+      "default": ''
+    },
+    reversed: {
+      type: Boolean,
+      "default": false
+    },
+    redirect: {}
+  },
   data: function data() {
     return {
       inChecked: undefined
@@ -2151,19 +2172,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     name: {
       "default": 'date'
     },
     disabled: {
+      type: Boolean,
       "default": false
     },
     required: {
+      type: Boolean,
       "default": false
     },
     value: {
       "default": undefined
+    },
+    error: {
+      type: Boolean,
+      "default": false
     }
   },
   data: function data() {
@@ -2184,6 +2215,10 @@ __webpack_require__.r(__webpack_exports__);
     this.getNoOfDays();
   },
   methods: {
+    open: function open() {
+      this.showDatepicker = !this.showDatepicker;
+      this.error = false;
+    },
     initDate: function initDate() {
       var today = this.value ? new Date(this.value) : new Date();
       this.month = today.getMonth();
@@ -31571,7 +31606,8 @@ var render = function() {
               }
             ],
             staticClass:
-              "w-full pl-4 pr-10 py-3 leading-none rounded  focus:outline-none text-gray-700 font-medium bg-gray-300",
+              "w-full pl-4 pr-10 py-3 leading-none rounded focus:outline-none text-gray-700 font-medium bg-gray-300",
+            class: { "border-2 border-red-600": _vm.error },
             attrs: {
               type: "text",
               readonly: "",
@@ -31582,7 +31618,7 @@ var render = function() {
             domProps: { value: _vm.datepickerValue },
             on: {
               click: function($event) {
-                _vm.showDatepicker = !_vm.showDatepicker
+                return _vm.open()
               },
               keydown: function($event) {
                 if (
@@ -31609,30 +31645,37 @@ var render = function() {
           }),
           _vm._v(" "),
           !_vm.disabled
-            ? _c("div", { staticClass: "absolute top-0 right-0 px-3 py-2" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "h-6 w-6 text-gray-500",
-                    attrs: {
-                      fill: "none",
-                      viewBox: "0 0 24 24",
-                      stroke: "currentColor"
-                    }
-                  },
-                  [
-                    _c("path", {
+            ? _c(
+                "div",
+                {
+                  staticClass: "absolute top-0 right-0 px-3",
+                  class: _vm.error ? "py-3" : "py-2"
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "h-6 w-6 text-gray-500",
                       attrs: {
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round",
-                        "stroke-width": "2",
-                        d:
-                          "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        fill: "none",
+                        viewBox: "0 0 24 24",
+                        stroke: "currentColor"
                       }
-                    })
-                  ]
-                )
-              ])
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                          "stroke-width": "2",
+                          d:
+                            "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
             : _vm._e(),
           _vm._v(" "),
           _c(

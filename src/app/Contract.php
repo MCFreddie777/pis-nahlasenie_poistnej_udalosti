@@ -12,4 +12,9 @@ class Contract extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function events()
+    {
+        return $this->hasMany('App\InsuranceEvent');
+    }
 }

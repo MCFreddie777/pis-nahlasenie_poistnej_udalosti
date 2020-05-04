@@ -31851,8 +31851,8 @@ var render = function() {
                             staticClass:
                               "cursor-pointer text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100",
                             class: {
-                              "bg-blue-500 text-white": _vm.isToday(date),
-                              "text-gray-700 hover:bg-blue-200": !_vm.isToday(
+                              "bg-red-600 text-white": _vm.isToday(date),
+                              "text-gray-700 hover:bg-red-200": !_vm.isToday(
                                 date
                               )
                             },
@@ -44386,8 +44386,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/feri/Library/Mobile Documents/com~apple~CloudDocs/STU/1.Ing/LS/PIS/nahlasenie-poistnej-udalosti/src/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/feri/Library/Mobile Documents/com~apple~CloudDocs/STU/1.Ing/LS/PIS/nahlasenie-poistnej-udalosti/src/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/feri/.Code/www/STU/nahlasenie-poistnej-udalosti/src/app/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/feri/.Code/www/STU/nahlasenie-poistnej-udalosti/src/app/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -13,6 +13,22 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'contracts'], function () use ($router) {
+    $router->get('/', 'ContractController@index');
+    $router->get('/{id}', 'ContractController@get');
+});
+
+$router->group(['prefix' => 'events'], function () use ($router) {
+    $router->get('/', 'InsuranceEventController@index');
+    $router->post('/', 'InsuranceEventController@store');
+    $router->get('/{id}', 'InsuranceEventController@get');
+});
+
+$router->get('/{any:.*}', function () {
+    return response()->json([
+        'error' => [
+            'code' => 404,
+            'message' => "Not found.",
+        ]
+    ]);
 });

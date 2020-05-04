@@ -76,10 +76,10 @@ class InsuranceEventController extends Controller
                 // filter null items from array
                 return !is_null($item);
             }));
+            $driver->phone = $result['items']['phone'];
 
             // Attach license to the driver
             $driver->licence()->associate($licence)->save();
-
             array_push($drivers, $driver);
         }
 

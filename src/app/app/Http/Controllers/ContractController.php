@@ -16,6 +16,10 @@ class ContractController extends Controller
 
         // GET request to REST api/contracts
         $response = Http::get(env('API_URL') . "/contracts")['contracts'];
+
+        if (!$response)
+            abort(500);
+
         $contracts = Contract::hydrate($response);
 
         // Filter only users' contracts
@@ -34,6 +38,10 @@ class ContractController extends Controller
 
         // GET request to REST api/contracts/{id}
         $response = Http::get(env('API_URL') . "/contracts/" . $request->id)['contract'];
+
+        if (!$response)
+            abort(500);
+
         $contract = new Contract($response);
 
         if (!Gate::allows('admin') && $contract->user->id != Auth::id())

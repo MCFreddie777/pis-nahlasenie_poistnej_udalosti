@@ -19,6 +19,10 @@ class ReviewEventsController extends Controller
 
         // GET request to REST api/events
         $response = Http::get(env('API_URL') . "/events")['events'];
+
+        if (!$response)
+            abort(500);
+
         $events = Event::hydrate($response);
 
         if (!Gate::allows('admin'))
@@ -43,6 +47,10 @@ class ReviewEventsController extends Controller
     {
         // GET request to REST api/events/{id}
         $response = Http::get(env('API_URL') . "/events/" . $request->id)['event'];
+
+        if (!$response)
+            abort(500);
+
         $event = $this->mapDependencies(new Event($response));
 
         $this->checkPermissions($event);
@@ -57,6 +65,9 @@ class ReviewEventsController extends Controller
             env('API_URL') . "/events/" . $request->id,
             array_merge($request->all(), ['user_id' => Auth::id()])
         )->json();
+
+        if (!$response)
+            abort(500);
 
         if (isset($response['success']) && !!$response['success']) {
             session()->put(['success' => ['Poistná udalosť bola úspešne spracovaná.']]);

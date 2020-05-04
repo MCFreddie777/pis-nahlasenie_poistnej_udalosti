@@ -18,6 +18,9 @@ class InsuranceEventController extends Controller
     {
         // GET request to REST api/events
         $response = Http::get(env('API_URL') . "/events")['events'];
+        if (!$response)
+            abort(500);
+
         $events = Event::hydrate($response);
 
         // filter not users' events and map their contract attribute
@@ -39,6 +42,9 @@ class InsuranceEventController extends Controller
     {
         // GET request to REST api/events/{id}
         $response = Http::get(env('API_URL') . "/events/" . $request->id)['event'];
+        if (!$response)
+            abort(500);
+
         $event = $this->mapDependencies(new Event($response));
 
         $this->checkPermissions($event->contract);
@@ -51,6 +57,9 @@ class InsuranceEventController extends Controller
     {
         // GET request to REST api/contracts/{id}
         $response = Http::get(env('API_URL') . "/contracts/" . $request->id)['contract'];
+        if (!$response)
+            abort(500);
+
         $contract = new Contract($response);
 
         $this->checkPermissions($contract);
@@ -65,6 +74,9 @@ class InsuranceEventController extends Controller
             env('API_URL') . "/events/",
             $request->all()
         )->json();
+
+        if (!$response)
+            abort(500);
 
         if (isset($response['success']) && !!$response['success']) {
             session()->put(['success' => ['Poistná udalosť bola vytvorená.']]);

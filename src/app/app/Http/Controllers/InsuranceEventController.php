@@ -61,7 +61,19 @@ class InsuranceEventController extends Controller
 
     public function store(Request $request)
     {
-        // TODO
+        $response = Http::asForm()->post(
+            env('API_URL') . "/events/",
+            $request->all()
+        )->json();
+
+        if (isset($response['success']) && !!$response['success']) {
+            session()->put(['success' => ['Poistná udalosť bola vytvorená.']]);
+            return redirect('/');
+        }
+
+        return redirect()->back()
+            ->withInput()
+            ->withErrors($response['errors']);
     }
 
     private function checkPermissions($item)
@@ -76,7 +88,7 @@ class InsuranceEventController extends Controller
 
         $model->drivers = array_map(function ($driver) {
             $driverObj = new Driver($driver);
-            $driverObj->licence = new DrivingLicence((array) $driverObj->licence);
+            $driverObj->licence = new DrivingLicence((array)$driverObj->licence);
             return $driverObj;
         }, $model->drivers);
 

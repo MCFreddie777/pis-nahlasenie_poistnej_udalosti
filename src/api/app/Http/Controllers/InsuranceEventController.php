@@ -29,13 +29,19 @@ class InsuranceEventController extends Controller
 
     public function store(Request $request)
     {
-        // TODO
-        $contract = Contract::findOrFail($request->get('contract_id'));
-
-        $this->checkPermissions($contract);
-
         // Validate request
-        $request->validate($this->rules(), $this->messages());
+        $validator = Validator::make($request->all(), $this->rules(), $this->messages());
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                ]
+            );
+        };
+
+        $contract = Contract::findOrFail($request->get('contract_id'));
 
         $data = $request->all();
 
@@ -67,7 +73,9 @@ class InsuranceEventController extends Controller
                 // filter null items from array
                 return !is_null($item);
             }));
-            $driver->phone = $result['items']['phone'];
+
+            if (isset($result['items']['phone']))
+                $driver->phone = $result['items']['phone'];
 
             // Attach license to the driver
             $driver->licence()->associate($licence)->save();
@@ -90,15 +98,7 @@ class InsuranceEventController extends Controller
 
         //Save
         $res = $contract->events()->save($event);
-
-        if ($res) {
-            session()->put(['success' => ['Poistná udalosť bola vytvorená.']]);
-            return redirect('/');
-        }
-
-        return redirect()->back()
-            ->withInput()
-            ->withErrors(['Nepodarilo sa vytvoriť poistnú udalosť']);
+        return response()->json(['success' => !!$res]);
     }
 
     public function update(Request $request)
@@ -132,6 +132,7 @@ class InsuranceEventController extends Controller
     private function rules()
     {
         return [
+            'contract_id' => 'required|numeric',
             'place' => 'required|string',
             'cost' => 'required|numeric',
             'date' => 'required|date_format:Y-m-d',
@@ -183,6 +184,7 @@ class InsuranceEventController extends Controller
     private function messages()
     {
         return [
+            'contract_id.required' => 'Niekde nastala chyba! Zopakujte požiadavku neskôr.',
             'place.required' => 'Nebolo zadané miesto poistnej udalosti',
             'cost.required' => 'Nebola uvedená škoda',
             'date.required' => 'Nebol uvedený dátum udalosti',

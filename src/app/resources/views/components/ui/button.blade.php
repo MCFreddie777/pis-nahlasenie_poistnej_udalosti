@@ -33,12 +33,14 @@
                 class="focus:outline-none bg-transparent hover:cursor-pointer"
                 style="text-align: center;"
                 {{ $attributes }}
+                @if(isset($disabled) && $disabled) disabled @endif
             />
         @else
             <button
                 class="focus:outline-none"
                 style="text-align: center;"
                 {{ $attributes }}
+                @if(isset($disabled) && $disabled) disabled @endif
             >
                 @isset($text)
                     {{ $text }}

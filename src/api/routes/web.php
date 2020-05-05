@@ -13,11 +13,6 @@
 |
 */
 
-$router->group(['prefix' => 'contracts'], function () use ($router) {
-    $router->get('/', 'ContractController@index');
-    $router->get('/{id}', 'ContractController@show');
-});
-
 $router->group(['prefix' => 'events'], function () use ($router) {
     $router->get('/', 'InsuranceEventController@index');
     $router->post('/', 'InsuranceEventController@store');

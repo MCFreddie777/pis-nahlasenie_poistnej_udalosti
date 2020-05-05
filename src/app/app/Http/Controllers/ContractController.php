@@ -3,19 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Contract;
+use App\Vehicle;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Gate;
+use Artisaninweb\SoapWrapper\SoapWrapper;
 
 class ContractController extends Controller
 {
+    protected $soapWrapper;
+
+    public function __construct(SoapWrapper $soapWrapper)
+    {
+        $this->soapWrapper = $soapWrapper;
+
+        $this->soapWrapper->add('Contract', function ($service) {
+            $service
+                ->wsdl('http://pis.predmety.fiit.stuba.sk/pis/ws/Students/Team073Contract?WSDL')
+                ->trace(true);
+        });
+
+        $this->soapWrapper->add('Vehicle', function ($service) {
+            $service
+                ->wsdl('http://pis.predmety.fiit.stuba.sk/pis/ws/Students/Team073Vehicle?WSDL')
+                ->trace(true);
+        });
+    }
+
     public function index()
     {
         $this->checkPermissions();
 
-        // GET request to REST api/contracts
-        $response = Http::get(env('API_URL') . "/contracts")['contracts'];
+        // getAll request to SOAP Contract WS
+        $response = $this->soapWrapper->call('Contract.getAll')->contracts->contract;
 
         if (!$response)
             abort(500);
@@ -36,13 +57,26 @@ class ContractController extends Controller
     {
         $this->checkPermissions();
 
-        // GET request to REST api/contracts/{id}
-        $response = Http::get(env('API_URL') . "/contracts/" . $request->id)['contract'];
+        // getById request to SOAP Contract WS
+        $response = $this->soapWrapper->call('Contract.getById', [[
+            'id' => $request['id']
+        ]])->contract;
 
         if (!$response)
             abort(500);
 
-        $contract = new Contract($response);
+        $contract = new Contract((array)$response);
+
+        // getById request to SOAP Vehicle WS
+        $response = $this->soapWrapper->call('Vehicle.getById', [[
+                'id' => $contract->vehicle_id,
+            ]]
+        )->vehicle;
+
+        if (!$response)
+            abort(500);
+
+        $contract->vehicle = new Vehicle((array)$response);
 
         if (!Gate::allows('admin') && $contract->user->id != Auth::id())
             abort(404);

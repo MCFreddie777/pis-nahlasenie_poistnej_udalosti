@@ -11,6 +11,8 @@
             >
                 Zmluva č. {{  $contract->id }}
             </h1>
+
+            @dump($contract)
         </div>
     </div>
 @stop

@@ -20,6 +20,7 @@
                     class="rounded-full w-24 mt-10"
                     text="Uložiť"
                     primary
+                    disabled
                     type="submit"
                 ></x-ui.button>
             </form>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contract;
+use App\User;
 use App\Vehicle;
 use Auth;
 use Illuminate\Http\Request;
@@ -78,11 +79,14 @@ class ContractController extends Controller
 
         $contract->vehicle = new Vehicle((array)$response);
 
-        if (!Gate::allows('admin') && $contract->user->id != Auth::id())
+        $user = User::findOrFail($contract->user->id);
+
+        if (!Gate::allows('admin') && $user->id != Auth::id())
             abort(404);
 
         return view('contracts.detail')
-            ->with('contract', $contract);
+            ->with('contract', $contract)
+            ->with('user', $user);
     }
 
     public function create()

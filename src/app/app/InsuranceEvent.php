@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class InsuranceEvent extends Model
 {
     protected $guarded = [];
-    protected $table = 'events';
-    public $timestamps = false;
 
     public function getEmployeeAttribute()
     {

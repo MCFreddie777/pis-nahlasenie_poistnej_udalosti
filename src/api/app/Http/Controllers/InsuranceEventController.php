@@ -2,28 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Contract;
 use App\Driver;
 use App\DrivingLicence;
 use App\DrivingLicenceGroup;
 use App\InsuranceEvent as Event;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Artisaninweb\SoapWrapper\SoapWrapper;
 
 class InsuranceEventController extends Controller
 {
     public function index()
     {
-        $events = Event::with(['contract'])->get();
+        $events = Event::all();
         return response()->json(['events' => $events]);
     }
 
     public function show(Request $request)
     {
-        $event = Event::with(['contract'])->findOrFail($request['id']);
+        $event = Event::findOrFail($request['id']);
         return response()->json(['event' => $event]);
     }
 
@@ -40,8 +38,6 @@ class InsuranceEventController extends Controller
                 ]
             );
         };
-
-        $contract = Contract::findOrFail($request->get('contract_id'));
 
         $data = $request->all();
 
@@ -95,9 +91,10 @@ class InsuranceEventController extends Controller
         $event->driverA_id = $drivers[0]->id;
         $event->driverB_id = $drivers[1]->id;
         $event->status = 'čakajúca';
+        $event->contract_id = $request->get('contract_id');
 
         //Save
-        $res = $contract->events()->save($event);
+        $res = $event->save();
         return response()->json(['success' => !!$res]);
     }
 

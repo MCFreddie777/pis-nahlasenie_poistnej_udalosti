@@ -95,6 +95,10 @@ $app->configure('app');
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+// Soap Wrapper
+$app->register(Artisaninweb\SoapWrapper\ServiceProvider::class);
+class_alias('Artisaninweb\SoapWrapper\Facade', 'SoapWrapper');
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

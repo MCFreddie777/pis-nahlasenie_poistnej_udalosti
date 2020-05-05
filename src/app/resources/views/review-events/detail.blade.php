@@ -224,7 +224,7 @@
                         center
                         class="mt-2"
                     >
-                        @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
+                        @foreach(DrivingLicenceGroup::$groups as $group)
                             <ui-checkbox
                                 text="{{$group}}"
                                 name="v0[group][]"
@@ -382,7 +382,7 @@
                         center
                         class="mt-2"
                     >
-                        @foreach(DrivingLicenceGroupsSeeder::$groups as $group)
+                        @foreach(DrivingLicenceGroup::$groups as $group)
                             <ui-checkbox
                                 text="{{$group}}"
                                 name="v1[group][]"

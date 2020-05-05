@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -228,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'SoapWrapper' => Artisaninweb\SoapWrapper\Facade\SoapWrapper::class,
+        'DrivingLicenceGroup' => App\DrivingLicenceGroup::class,
     ],
 
 ];

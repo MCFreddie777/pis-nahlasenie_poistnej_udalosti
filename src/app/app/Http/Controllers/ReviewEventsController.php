@@ -6,6 +6,7 @@ use App\Contract;
 use App\Driver;
 use App\DrivingLicence;
 use App\InsuranceEvent as Event;
+use Artisaninweb\SoapWrapper\SoapWrapper;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,19 @@ use Illuminate\Support\Facades\Gate;
 
 class ReviewEventsController extends Controller
 {
+    protected $soapWrapper;
+
+    public function __construct(SoapWrapper $soapWrapper)
+    {
+        $this->soapWrapper = $soapWrapper;
+
+        $this->soapWrapper->add('Contract', function ($service) {
+            $service
+                ->wsdl('http://pis.predmety.fiit.stuba.sk/pis/ws/Students/Team073Contract?WSDL')
+                ->trace(true);
+        });
+    }
+
     public function index()
     {
         $this->checkPermissions();
@@ -96,7 +110,16 @@ class ReviewEventsController extends Controller
 
     private function mapDependencies($model)
     {
-        $model->contract = new Contract($model->contract);
+
+        // getById request to SOAP Contract WS
+        $response = $this->soapWrapper->call('Contract.getById', [[
+            'id' => $model->contract_id
+        ]])->contract;
+
+        if (!$response)
+            abort(500);
+
+        $model->contract = new Contract((array)$response);
 
         $model->drivers = array_map(function ($driver) {
             $driverObj = new Driver($driver);

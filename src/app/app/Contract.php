@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
     protected $guarded = [];
-    public $timestamps = false;
 
     public function user()
     {

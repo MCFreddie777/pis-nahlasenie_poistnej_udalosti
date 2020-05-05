@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             DefaultAccountsSeeder::class,
-            DrivingLicenceGroupsSeeder::class,
             UserSeeder::class
         ]);
     }

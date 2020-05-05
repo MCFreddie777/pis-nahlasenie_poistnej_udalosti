@@ -20,6 +20,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function contracts() {
+        return $this->hasMany('App\Contract');
+    }
+
     /**
      * @var mixed
      */

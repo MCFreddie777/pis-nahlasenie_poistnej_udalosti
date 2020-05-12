@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Http;
 
 class InsuranceEventController extends Controller
 {
-    protected $soapWrapper;
 
     public function __construct(SoapWrapper $soapWrapper)
     {

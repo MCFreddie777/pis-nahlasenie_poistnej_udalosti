@@ -13,6 +13,19 @@ use Artisaninweb\SoapWrapper\SoapWrapper;
 
 class InsuranceEventController extends Controller
 {
+    protected $soapWrapper;
+
+    public function __construct(SoapWrapper $soapWrapper)
+    {
+        $this->soapWrapper = $soapWrapper;
+
+        $this->soapWrapper->add('Contract', function ($service) {
+            $service
+                ->wsdl('http://pis.predmety.fiit.stuba.sk/pis/ws/Students/Team073Contract?WSDL')
+                ->trace(true);
+        });
+    }
+
     public function index()
     {
         $events = Event::all();
@@ -38,6 +51,13 @@ class InsuranceEventController extends Controller
                 ]
             );
         };
+
+        // getById request to SOAP Contract WS
+        $contract = $this->soapWrapper->call('Contract.getById', [[
+            'id' => $request->get('contract_id')
+        ]])->contract;
+
+        if (!$contract) abort(500);
 
         $data = $request->all();
 
@@ -90,7 +110,16 @@ class InsuranceEventController extends Controller
         // Save drivers
         $event->driverA_id = $drivers[0]->id;
         $event->driverB_id = $drivers[1]->id;
-        $event->status = 'čakajúca';
+        if (
+            $request->get('cost') > $contract->coverage ||
+            $request->get('cost') > $contract->vehicle_value
+        ) {
+            $event->status = 'zamietnutá';
+
+        } else {
+            $event->status = 'čakajúca';
+
+        }
         $event->contract_id = $request->get('contract_id');
 
         //Save

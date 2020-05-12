@@ -114,6 +114,8 @@ class InsuranceEventController extends Controller
         if ($request->get('review-note')) {
             $event->review_note = $request->get('review-note');
             $event->status = 'zamietnutá';
+        } else if ($request->get('assign')) {
+            $event->status = 'rozpracovaná';
         } else {
             $event->status = 'vybavená';
         }

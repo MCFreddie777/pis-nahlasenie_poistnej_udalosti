@@ -84,8 +84,12 @@ class ReviewEventsController extends Controller
             abort(500);
 
         if (isset($response['success']) && !!$response['success']) {
-            session()->put(['success' => ['Poistná udalosť bola úspešne spracovaná.']]);
-            return redirect('/');
+            session()->put(['success' => ['Poistná udalosť bola úspešne aktualizovaná.']]);
+            if ($request->get('assign')) {
+                return redirect()->back();
+            } else {
+                return redirect('/');
+            }
         }
 
         return redirect()->back()

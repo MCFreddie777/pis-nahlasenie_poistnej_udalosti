@@ -19,6 +19,32 @@
                 ></x-ui.status-icon>
                 {{$event->status}}
 
+                <div class="ml-auto">
+                    @isset($event->employee->id)
+                        <span>
+
+                        <span class="text-gray-500"> Priradené:</span>
+                        @if ($event->employee->id == Auth::id())
+                                mne
+                            @else
+                                {{ $event->employee->name }}
+                            @endif
+                        </span>
+                    @else
+                        <form action="" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                            <input type="hidden" name="assign" value="true">
+                            <x-ui.button
+                                class="rounded-full"
+                                text="Priradiť mne"
+                                primary
+                                type="submit"
+                            ></x-ui.button>
+                        </form>
+                    @endisset
+                </div>
+
             </div>
 
             <h1 class="text-lg mb-8 pb-2 border-b-2 border-gray-300 w-1/4">
